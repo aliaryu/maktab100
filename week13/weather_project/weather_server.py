@@ -1,6 +1,9 @@
 import requests
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
 import os
 os.system("cls" if os.name == "nt" else "clear")
+
 
 def get_city_weather(city_name: str) -> dict:
     """
@@ -33,3 +36,32 @@ def get_city_weather(city_name: str) -> dict:
             }
         else:
             return data["error"]["message"]
+
+
+class ServerRequestHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(bytes("hi", "utf-8"))
+
+
+def start_server() -> None:
+    """
+    This function starts the weather server on localhost.
+    """
+    host = "192.168.1.101"
+    port = 8000
+    server = HTTPServer((host, port), ServerRequestHandler)
+    try:
+        print(f"Server Running on 'http://{host}:{port}'")
+        print("For stop server use 'Ctrl+C' or kill terminal.")
+        print("...")
+        server.serve_forever()
+    except KeyboardInterrupt:
+        server.server_close()
+        print("...")
+        print("Server Stopped.")
+
+if __name__ == "__main__":  
+    start_server()
