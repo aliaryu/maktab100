@@ -1,6 +1,11 @@
 import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
+# Parse paramets of a url received by POST method
+from urllib.parse import parse_qs
+
+import json
+
 import os
 os.system("cls" if os.name == "nt" else "clear")
 
@@ -41,19 +46,45 @@ def get_city_weather(city_name: str) -> dict:
 class ServerRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
-        self.send_header("Content-type", "text/html")
+        self.send_header("Content-type", "application/json")
         self.end_headers()
-        self.wfile.write(bytes("hi", "utf-8"))
+        data = json.dumps(get_city_weather("London"))
+        self.wfile.write(bytes(data, "utf-8"))
+
+
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length'])
+        body = self.rfile.read(content_length).decode('utf-8')
+
+        parameters = parse_qs(body)
+        weather = get_city_weather(parameters["city_name"][0])
+
+        if isinstance(weather, str):
+            self.send_response(404)
+        else:
+            self.send_response(200)
+        
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        data = json.dumps(weather)
+        self.wfile.write(bytes(data, "utf-8"))
+
+
 
 
 def start_server() -> None:
     """
     This function starts the weather server on localhost.
     """
+
+    # CONFIGS - according ipv4 or ipv6 and a free port
     host = "192.168.1.101"
     port = 8000
     server = HTTPServer((host, port), ServerRequestHandler)
+
     try:
+        emoji = "⣿⣸⠈⠄⠄⠰⠾⠴⢾⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⢁⣾⢀⠁⠄⠄⠄⢠⢸⣿⣿\n⣿⣿⣆⠄⠆⠄⣦⣶⣦⣌⣿⣿⣿⣿⣷⣋⣀⣈⠙⠛⡛⠌⠄⠄⠄⠄⢸⢸⣿⣿\n⣿⣿⣿⠄⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠈⠄⠄⠄⠄⠄⠈⢸⣿⣿\n⣿⣿⣿⠄⠄⠄⠘⣿⣿⣿⡆⢀⣈⣉⢉⣿⣿⣯⣄⡄⠄⠄⠄⠄⠄⠄⠄⠈⣿⣿\n⣿⣿⡟⡜⠄⠄⠄⠄⠙⠿⣿⣧⣽⣍⣾⣿⠿⠛⠁⠄⠄⠄⠄⠄⠄⠄⠄⠃⢿⣿"
+        print(emoji)
         print(f"Server Running on 'http://{host}:{port}'")
         print("For stop server use 'Ctrl+C' or kill terminal.")
         print("...")
@@ -63,5 +94,8 @@ def start_server() -> None:
         print("...")
         print("Server Stopped.")
 
+
 if __name__ == "__main__":  
     start_server()
+
+# curl -X POST -H "Content-Type: application/json" -d '{"city_name": "london"}' 192.168.1.101
