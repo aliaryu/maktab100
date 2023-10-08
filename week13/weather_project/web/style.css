@@ -1,0 +1,91 @@
+*{
+    font-family: Calibri;
+}
+body {
+    background-image: url("bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    background-attachment: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-f {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    height: 90vh;
+    width: 300px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+input {
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    opacity: .65;
+    height: 30px;
+}
+
+.response {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    background-color: white;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    border-radius: 3px;
+    opacity: .65;
+
+    display: none;
+}
+
+.response p {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+.on {
+    display: flex;
+}
+
+#github {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    position: fixed;
+    bottom: 1px;
+}
+#github p {
+    font-size: 18px;
+    color: white;
+}
+a {
+    color: white;
+}
+a:visited {
+    color: white;
+}
+svg {
+    fill: white;
+}
