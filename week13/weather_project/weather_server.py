@@ -7,6 +7,7 @@ import os
 os.system("cls" if os.name == "nt" else "clear")
 
 
+
 def get_city_weather(city_name: str) -> Union[dict, str]:
     """
     This function retrieve weather data from an external API for a given city.
@@ -43,11 +44,20 @@ def get_city_weather(city_name: str) -> Union[dict, str]:
 class ServerRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        data = "<html><head></head><body><h1>Hi ^^ st</h1></body></html>"
-        self.wfile.write(bytes(data, "utf-8"))
+        if self.path.endswith(".css"):
+            self.send_response(200)
+            self.send_header("Content-type", "text/css")
+            self.end_headers()
+            with open("web/style.css", "r") as file:
+                data = file.read()
+            self.wfile.write(bytes(data, "utf-8"))
+        else:
+            self.send_response(200)
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
+            with open("web/index.html", "r") as file:
+                data = file.read()
+            self.wfile.write(bytes(data, "utf-8"))
 
 
     # For test in terminal: curl 192.168.1.101:8000 -X POST -d "city_name=london"
@@ -67,8 +77,6 @@ class ServerRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         data = json.dumps(weather)
         self.wfile.write(bytes(data, "utf-8"))
-
-
 
 
 def start_server() -> None:
