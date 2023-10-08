@@ -45,27 +45,28 @@ class Menu:
 
         if choice == 0:
             if self.parent:
-                os.system("cls")
+                os.system("cls" if os.name == "nt" else "clear")
                 self.parent.display()
                 self.parent.execute()
             else:
+                os.system("cls" if os.name == "nt" else "clear")
                 print(">>> bye bye ;*")
         elif 1 <= choice <= len(self.items):
             item = self.items[choice - 1]
             if isinstance(item, Item):
-                os.system("cls")
+                os.system("cls" if os.name == "nt" else "clear")
                 item.execute()
                 print()
                 self.display()
                 self.execute()
                 
             elif isinstance(item, Menu):
-                os.system("cls")
+                os.system("cls" if os.name == "nt" else "clear")
                 item.display()
                 item.execute()
                 print()
         else:
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             print("Invalid input..\n")
             self.display()
             self.execute()
