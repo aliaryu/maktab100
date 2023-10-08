@@ -64,7 +64,7 @@ class ServerRequestHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "application/javascript")
             self.end_headers()
-            with open("web/script.js", "r") as file:
+            with open("web/script.js", "r", encoding='utf-8') as file:
                 data = file.read()
             self.wfile.write(bytes(data, "utf-8"))
         else:
