@@ -1,16 +1,13 @@
+from typing import Union
 import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
-
-# Parse paramets of a url received by POST method
 from urllib.parse import parse_qs
-
 import json
-
 import os
 os.system("cls" if os.name == "nt" else "clear")
 
 
-def get_city_weather(city_name: str) -> dict:
+def get_city_weather(city_name: str) -> Union[dict, str]:
     """
     This function retrieve weather data from an external API for a given city.
 
@@ -44,14 +41,16 @@ def get_city_weather(city_name: str) -> dict:
 
 
 class ServerRequestHandler(BaseHTTPRequestHandler):
+
     def do_GET(self):
         self.send_response(200)
-        self.send_header("Content-type", "application/json")
+        self.send_header("Content-type", "text/html")
         self.end_headers()
-        data = json.dumps(get_city_weather("London"))
+        data = "<html><head></head><body><h1>Hi ^^ st</h1></body></html>"
         self.wfile.write(bytes(data, "utf-8"))
 
 
+    # For test in terminal: curl 192.168.1.101:8000 -X POST -d "city_name=london"
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length).decode('utf-8')
@@ -97,5 +96,3 @@ def start_server() -> None:
 
 if __name__ == "__main__":  
     start_server()
-
-# curl -X POST -H "Content-Type: application/json" -d '{"city_name": "london"}' 192.168.1.101
