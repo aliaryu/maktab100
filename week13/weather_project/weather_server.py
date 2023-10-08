@@ -7,7 +7,6 @@ import os
 os.system("cls" if os.name == "nt" else "clear")
 
 
-
 def get_city_weather(city_name: str) -> Union[dict, str]:
     """
     This function retrieve weather data from an external API for a given city.
@@ -44,11 +43,28 @@ def get_city_weather(city_name: str) -> Union[dict, str]:
 class ServerRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
+        # This conditional statements handling what content type added to page
         if self.path.endswith(".css"):
             self.send_response(200)
             self.send_header("Content-type", "text/css")
             self.end_headers()
             with open("web/style.css", "r") as file:
+                data = file.read()
+            self.wfile.write(bytes(data, "utf-8"))
+        elif self.path.endswith((".jpg", ".png", ".gif")):
+            image_path = "web" + self.path
+            content_type = "image/jpeg" if self.path.endswith(".jpg") else "image/png" if self.path.endswith(".png") else "image/gif"
+            self.send_response(200)
+            self.send_header("Content-type", content_type)
+            self.end_headers()
+            with open(image_path, "rb") as file:
+                data = file.read()
+            self.wfile.write(data)
+        elif self.path.endswith(".js"):
+            self.send_response(200)
+            self.send_header("Content-type", "application/javascript")
+            self.end_headers()
+            with open("web/script.js", "r") as file:
                 data = file.read()
             self.wfile.write(bytes(data, "utf-8"))
         else:
