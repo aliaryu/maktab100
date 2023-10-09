@@ -1,3 +1,6 @@
 
 # Ignore caches of python modules
 __pycache__/
+
+# Ignore databases
+*.db
