@@ -1,5 +1,6 @@
 from menu import Menu, Item
 import requests
+from ipv4 import get_ipv4
 import os
 os.system("cls" if os.name == "nt" else "clear")
 
@@ -11,7 +12,7 @@ def get_weather(city_name: str) -> dict:
     """
 
     # CONFIGS
-    url = "http://192.168.1.101:8000/"
+    url = f"http://{get_ipv4()}:8000/"
     params = {"city_name": city_name}
 
     try: 
@@ -21,7 +22,7 @@ def get_weather(city_name: str) -> dict:
     except requests.exceptions.ConnectionError:
         return "Connection Error - maybe server is off?"
     except Exception as error:
-        return error
+        return 'Unexpected Error o_o"'
 
 
 def show_weather():
@@ -49,7 +50,6 @@ def start_client() -> None:
 
     item_weather = Item("Weather", show_weather)
     main_menu.add_item(item_weather)
-
 
     main_menu.display()
     main_menu.execute()

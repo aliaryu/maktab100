@@ -3,6 +3,8 @@ import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
 import json
+from database import DataBase
+from ipv4 import get_ipv4
 import os
 os.system("cls" if os.name == "nt" else "clear")
 
@@ -25,19 +27,31 @@ def get_city_weather(city_name: str) -> Union[dict, str]:
     api_key = "36da30a8c7654537b83181509230710"
     params  = {"key":api_key, "q":city_name, "aqi":"no"}
 
-    # REQUEST MANAGER
-    with requests.Session() as r:
-        r = requests.get(url, params=params)
-        data = r.json()
+    db = DataBase()
+    request_id = db.save_request_data(city_name)
 
-        if r.status_code == 200:
-            return {
-                "temperature" : data["current"]["temp_c"],
-                "feels_like"  : data["current"]["feelslike_c"],
-                "last_updated": data["current"]["last_updated"]
-            }
-        else:
-            return data["error"]["message"]
+    # REQUEST MANAGER
+    try:
+        with requests.Session() as r:
+            r = requests.get(url, params=params)
+            data = r.json()
+
+            if r.status_code == 200:
+                successful = 1
+                data = {
+                    "temperature" : data["current"]["temp_c"],
+                    "feels_like"  : data["current"]["feelslike_c"],
+                    "last_updated": data["current"]["last_updated"]
+                }
+                db.save_response_data(successful, json.dumps(data), request_id)
+                return data
+            else:
+                successful = 0
+                data = data["error"]["message"]
+                db.save_response_data(successful, data, request_id)
+                return data
+    finally:
+        db.close_connection()
 
 
 class ServerRequestHandler(BaseHTTPRequestHandler):
@@ -101,7 +115,7 @@ def start_server() -> None:
     """
 
     # CONFIGS - according ipv4 or ipv6 and a free port
-    host = "192.168.1.101"
+    host = get_ipv4()
     port = 8000
     server = HTTPServer((host, port), ServerRequestHandler)
 
