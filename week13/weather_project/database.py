@@ -1,5 +1,6 @@
 import sqlite3
 import datetime
+from typing import List, Tuple
 
 
 class DataBase():
@@ -85,6 +86,27 @@ class DataBase():
         query = "SELECT COUNT(*) FROM response WHERE successful = 1"
         self.cursor.execute(query)
         return self.cursor.fetchone()[0]
+
+    def get_last_hour_requests(self) -> List[Tuple]:
+        """
+        Get all requests made in the last hour.
+        Returns: list, A list of tuples containing
+        the request city name, and request time.
+        """
+        hour_ago = datetime.datetime.now() - datetime.timedelta(hours=1)
+        query = f"SELECT city_name, request_time FROM request WHERE request_time >= {hour_ago}"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+    
+    def get_count_requests_by_city(self) -> List[Tuple]:
+        """
+        Count the number of requests for each city.
+        Returns: list, A list of tuples where each tuple contains
+        the city name and the corresponding request count.
+        """
+        query = "SELECT city_name, COUNT(*) FROM request GROUP BY city_name"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
 
     def close_connection(self) -> None:
         """
