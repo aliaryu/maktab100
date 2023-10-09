@@ -27,11 +27,10 @@ def get_city_weather(city_name: str) -> Union[dict, str]:
     api_key = "36da30a8c7654537b83181509230710"
     params  = {"key":api_key, "q":city_name, "aqi":"no"}
 
-    db = DataBase()
-    request_id = db.save_request_data(city_name)
-
     # REQUEST MANAGER
     try:
+        db = DataBase()
+        request_id = db.save_request_data(city_name)
         with requests.Session() as r:
             r = requests.get(url, params=params)
             data = r.json()
@@ -93,17 +92,38 @@ class ServerRequestHandler(BaseHTTPRequestHandler):
     # For test in terminal: curl 192.168.1.101:8000 -X POST -d "city_name=london"
     def do_POST(self):
         if self.path == "/get_request_count":
-            db = DataBase()
-            data = db.get_request_count()
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            data = json.dumps(data)
-            self.wfile.write(bytes(data, "utf-8"))
+            try:
+                db = DataBase()
+                data = db.get_request_count()
+                self.send_response(200)
+                self.send_header("Content-type", "application/json")
+                self.end_headers()
+                data = json.dumps(data)
+                self.wfile.write(bytes(data, "utf-8"))
+            finally:
+                db.close_connection()
         elif self.path == "/get_successful_request_count":
-            pass
+            try:
+                db = DataBase()
+                data = db.get_successful_request_count()
+                self.send_response(200)
+                self.send_header("Content-type", "application/json")
+                self.end_headers()
+                data = json.dumps(data)
+                self.wfile.write(bytes(data, "utf-8"))
+            finally:
+                db.close_connection()
         elif self.path == "/get_last_hour_requests":
-            pass
+            try:
+                db = DataBase()
+                data = db.get_last_hour_requests()
+                self.send_response(200)
+                self.send_header("Content-type", "application/json")
+                self.end_headers()
+                data = json.dumps(data)
+                self.wfile.write(bytes(data, "utf-8"))
+            finally:
+                db.close_connection()
         elif self.path == "/get_count_requests_by_city":
             pass
         else:

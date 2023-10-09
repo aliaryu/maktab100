@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, List, Tuple
 from menu import Menu, Item
 import requests
 from ipv4 import get_ipv4
@@ -33,6 +33,8 @@ def show_weather() -> None:
     if isinstance(data, dict):
         for key, value in data.items():
             print(key, value)
+        input("\nPress 'Enter' to back to the menu ^^\n>>> ")
+        os.system("cls" if os.name == "nt" else "clear")
     else:
         print(data)
 
@@ -43,7 +45,7 @@ def get_request_count() -> int:
     try: 
         with requests.Session() as r:
             r = requests.post(url)
-            return r.json()
+            return int(r.json())
     except requests.exceptions.ConnectionError:
         return "Connection Error - maybe server is off?"
     except Exception as error:
@@ -52,12 +54,59 @@ def get_request_count() -> int:
 
 def show_request_count() -> None:
     """This function is an Action for menu"""
-    os.system("cls" if os.name == "nt" else "clear")
     data = get_request_count()
-    if isinstance(data, dict):
-        print("Count Requests: ", data.values()[0])
+    if isinstance(data, int):
+        print("Count Requests:", data)
     else:
-        print("Count Requests: ",data)
+        print(data)
+
+
+def get_successful_request_count() -> int:
+    """This function gets the number of successful requests in server"""
+    url = f"http://{get_ipv4()}:8000/get_successful_request_count"
+    try: 
+        with requests.Session() as r:
+            r = requests.post(url)
+            return int(r.json())
+    except requests.exceptions.ConnectionError:
+        return "Connection Error - maybe server is off?"
+    except Exception as error:
+        return 'Unexpected Error o_o"'
+
+
+def show_successful_request_count():
+    """This function is an Action for menu"""
+    data = get_successful_request_count()
+    if isinstance(data, int):
+        print("Count Successful Requests:", data)
+    else:
+        print(data)
+
+
+def get_last_hour_requests() -> List[List]:
+    """This function gets last hour requests in server"""
+    url = f"http://{get_ipv4()}:8000/get_last_hour_requests"
+    try: 
+        with requests.Session() as r:
+            r = requests.post(url)
+            return r.json()
+    except requests.exceptions.ConnectionError:
+        return "Connection Error - maybe server is off?"
+    except Exception as error:
+        return 'Unexpected Error o_o"'
+
+
+def show_last_hour_requests():
+    """This function is an Action for menu"""
+    data = get_last_hour_requests()
+    if isinstance(data, list):
+        for city_date in data:
+            print(city_date[0].ljust(20), city_date[1])
+        input("\nPress 'Enter' to back to the menu ^^\n>>> ")
+        os.system("cls" if os.name == "nt" else "clear")
+    else:
+        print(data)
+
 
 
 def start_client() -> None:
@@ -73,6 +122,12 @@ def start_client() -> None:
 
     item_count_requests = Item("Count Requests", show_request_count)
     main_menu.add_item(item_count_requests)
+
+    item_count_successful_requests = Item("Count Successful Requests" , show_successful_request_count)
+    main_menu.add_item(item_count_successful_requests)
+
+    item_last_hour_requests = Item("Last Hour Requests", show_last_hour_requests)
+    main_menu.add_item(item_last_hour_requests)
 
     main_menu.display()
     main_menu.execute()
