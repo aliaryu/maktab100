@@ -44,7 +44,7 @@ class DataBase():
             - city_name (str): The name of the city to save request data for.
         Returns: int, the last row id, for save in response we need request id.
         """
-        now = datetime.datetime.now().strftime("%Y-%m-%d %H:M:S")
+        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         query = f"""
             INSERT INTO request (city_name, request_time) 
             VALUES ('{city_name}', '{now}')
@@ -87,10 +87,10 @@ class DataBase():
         self.cursor.execute(query)
         return self.cursor.fetchone()[0]
 
-    def get_last_hour_requests(self) -> List[Tuple]:
+    def get_last_hour_requests(self) -> List[List]:
         """
         Get all requests made in the last hour.
-        Returns: list, A list of tuples containing
+        Returns: list, A list of lists containing
         the request city name, and request time.
         """
         hour_ago = datetime.datetime.now() - datetime.timedelta(hours=1)
