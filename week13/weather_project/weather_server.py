@@ -92,21 +92,33 @@ class ServerRequestHandler(BaseHTTPRequestHandler):
 
     # For test in terminal: curl 192.168.1.101:8000 -X POST -d "city_name=london"
     def do_POST(self):
-        content_length = int(self.headers['Content-Length'])
-        body = self.rfile.read(content_length).decode('utf-8')
-
-        parameters = parse_qs(body)
-        weather = get_city_weather(parameters["city_name"][0])
-
-        if isinstance(weather, str):
-            self.send_response(404)
-        else:
+        if self.path == "/get_request_count":
+            db = DataBase()
+            data = db.get_request_count()
             self.send_response(200)
-        
-        self.send_header("Content-type", "application/json")
-        self.end_headers()
-        data = json.dumps(weather)
-        self.wfile.write(bytes(data, "utf-8"))
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            data = json.dumps(data)
+            self.wfile.write(bytes(data, "utf-8"))
+        elif self.path == "/get_successful_request_count":
+            pass
+        elif self.path == "/get_last_hour_requests":
+            pass
+        elif self.path == "/get_count_requests_by_city":
+            pass
+        else:
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length).decode('utf-8')
+            parameters = parse_qs(body)
+            weather = get_city_weather(parameters["city_name"][0])
+            if isinstance(weather, str):
+                self.send_response(404)
+            else:
+                self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            data = json.dumps(weather)
+            self.wfile.write(bytes(data, "utf-8"))
 
 
 def start_server() -> None:
