@@ -125,12 +125,21 @@ class ServerRequestHandler(BaseHTTPRequestHandler):
             finally:
                 db.close_connection()
         elif self.path == "/get_count_requests_by_city":
-            pass
+            try:
+                db = DataBase()
+                data = db.get_count_requests_by_city()
+                self.send_response(200)
+                self.send_header("Content-type", "application/json")
+                self.end_headers()
+                data = json.dumps(data)
+                self.wfile.write(bytes(data, "utf-8"))
+            finally:
+                db.close_connection()
         else:
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length).decode('utf-8')
             parameters = parse_qs(body)
-            weather = get_city_weather(parameters["city_name"][0])
+            weather = get_city_weather(parameters["city_name"][0].lower())
             if isinstance(weather, str):
                 self.send_response(404)
             else:

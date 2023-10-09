@@ -98,10 +98,10 @@ class DataBase():
         self.cursor.execute(query)
         return self.cursor.fetchall()
     
-    def get_count_requests_by_city(self) -> List[Tuple]:
+    def get_count_requests_by_city(self) -> List[List]:
         """
         Count the number of requests for each city.
-        Returns: list, A list of tuples where each tuple contains
+        Returns: list, A list of lists where each tuple contains
         the city name and the corresponding request count.
         """
         query = "SELECT city_name, COUNT(*) FROM request GROUP BY city_name"

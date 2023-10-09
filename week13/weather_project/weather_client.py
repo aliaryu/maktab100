@@ -74,6 +74,34 @@ def get_successful_request_count() -> int:
         return 'Unexpected Error o_o"'
 
 
+def get_count_requests_by_city() -> List[List]:
+    """This function gets requests count group by city in server"""
+    url = f"http://{get_ipv4()}:8000/get_count_requests_by_city"
+    try: 
+        with requests.Session() as r:
+            r = requests.post(url)
+            return r.json()
+    except requests.exceptions.ConnectionError:
+        return "Connection Error - maybe server is off?"
+    except Exception as error:
+        return 'Unexpected Error o_o"'
+
+
+def show_count_requests_by_city():
+    """This function is an Action for menu"""
+    data = get_count_requests_by_city()
+    if isinstance(data, list):
+        if data:
+            for city_number in data:
+                print(city_number[0].ljust(20), city_number[1])
+            input("\nPress 'Enter' to back to the menu ^^\n>>> ")
+            os.system("cls" if os.name == "nt" else "clear")
+        else:
+            print("There is no data yet :D")
+    else:
+        print(data)
+
+
 def show_successful_request_count():
     """This function is an Action for menu"""
     data = get_successful_request_count()
@@ -100,13 +128,15 @@ def show_last_hour_requests():
     """This function is an Action for menu"""
     data = get_last_hour_requests()
     if isinstance(data, list):
-        for city_date in data:
-            print(city_date[0].ljust(20), city_date[1])
-        input("\nPress 'Enter' to back to the menu ^^\n>>> ")
-        os.system("cls" if os.name == "nt" else "clear")
+        if data:
+            for city_date in data:
+                print(city_date[0].ljust(20), city_date[1])
+            input("\nPress 'Enter' to back to the menu ^^\n>>> ")
+            os.system("cls" if os.name == "nt" else "clear")
+        else:
+            print("There is no data yet :D")
     else:
         print(data)
-
 
 
 def start_client() -> None:
@@ -114,7 +144,7 @@ def start_client() -> None:
     This function starts the weather client command-line interface.
     Used cli menu to create interface for interact in terminal.
     """
-    
+
     main_menu = Menu("Main")
 
     item_weather = Item("Weather", show_weather)
@@ -123,8 +153,11 @@ def start_client() -> None:
     item_count_requests = Item("Count Requests", show_request_count)
     main_menu.add_item(item_count_requests)
 
-    item_count_successful_requests = Item("Count Successful Requests" , show_successful_request_count)
+    item_count_successful_requests = Item("Count Successful Requests", show_successful_request_count)
     main_menu.add_item(item_count_successful_requests)
+
+    item_count_requests_by_city = Item("Count City Requests", show_count_requests_by_city)
+    main_menu.add_item(item_count_requests_by_city)
 
     item_last_hour_requests = Item("Last Hour Requests", show_last_hour_requests)
     main_menu.add_item(item_last_hour_requests)
