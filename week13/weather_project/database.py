@@ -5,7 +5,10 @@ from typing import List, Tuple
 
 class DataBase():
     def __init__(self, path="."):
-        self.connection = sqlite3.connect(f"{path}/database.db")
+        if path == ":memory:":
+            self.connection = sqlite3.connect(path)
+        else:
+            self.connection = sqlite3.connect(f"{path}/database.db")
         self.cursor = self.connection.cursor()
         self.create_table()
     
