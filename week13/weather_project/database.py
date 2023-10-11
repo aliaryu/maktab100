@@ -90,7 +90,7 @@ class DataBase():
         self.cursor.execute(query)
         return self.cursor.fetchone()[0]
 
-    def get_last_hour_requests(self) -> List[List]:
+    def get_last_hour_requests(self) -> List[Tuple]:
         """
         Get all requests made in the last hour.
         Returns: list, A list of lists containing
