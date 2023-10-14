@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>cw 3</title>
+</head>
+<body class="container mt-5" dir="rtl">
+
+    <div>
+        <span>صفحه اصلی</span><span class="px-3 fw-bold">></span><span>Front-End Developer</span><span class="px-3 fw-bold">></span><span>فرم درخواست</span>
+    </div>
+
+    <div class="border my-3"></div>
+
+    <div class="contaier">
+        <div class="row">
+
+            <div class="col-3">
+                <h4>اطلاعات شخصی</h4>
+                <span class="text-muted">لطفا به سوالات مقابل پاسخ دهید</span>
+            </div>
+
+            <div class="col-6">
+                <form action="#">
+
+                    <div class="mb-3 mb-4">
+                        <label for="input-name" class="form-label mb-1">
+                            نام
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="email" class="form-control" id="input-name" placeholder="نام">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="input-family" class="form-label mb-1">
+                            نام خانوادگی
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="email" class="form-control" id="input-family" placeholder="نام خانوادگی">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="input-email" class="form-label mb-1">
+                            پست الکترونیکی
+                        </label>
+                        <input type="email" class="form-control" id="input-email" placeholder="example@gmail.com">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="input-phone" class="form-label mb-1">
+                            تلفن همراه
+                        </label>
+                        <div class="d-flex">
+                            <button class="btn border border-start-0 rounded-0 rounded-end">X</button>
+                            <input type="tel" class="form-control border-start-0 border-end-0 rounded-0 rounded-y" id="input-phone" placeholder="تلفن همراه" dir="ltr">
+                            <span class="d-flex align-items-center py-1 px-2 border rounded-start border-end-0">(+98)</span>
+
+                            <select class="form-select w-auto me-1" aria-label="language">
+                                <option selected>IR</option>
+                                <option value="1">RU</option>
+                                <option value="2">US</option>
+                                <option value="3">DE</option>
+                            </select>
+                        </div>
+                      </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="border my-3"></div>
+
+    <div class="contaier">
+        <div class="row">
+
+            <div class="col-3">
+                <h4>رزومه</h4>
+                <span class="text-muted">رزومه خود را برای ما ارسال کنید</span>
+            </div>
+
+            <div class="col-6 my-3">
+                <button class="btn btn-warning text-white me-md-2" type="">افزودن فایل</button>
+                <span class="text-muted mx-2">تنها پسوند pdf, doc, docx, png, jpg مجاز است.</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center my-5">
+        <button class="btn btn-warning text-white me-md-2" type="file">ارسال فرم</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
