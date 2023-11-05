@@ -9,6 +9,11 @@ def config(file_name, section):
     raise NoSectionError(f"Section '{section}' not exists in '{file_name}' file")
 
 
+# CONFIGS:
+POSTGRES_CONFIG = config("config.ini", "postgres")
+HOSPITAL_CONFIG = config("config.ini", "hospital")
+
+
 class DBManager:
     def __init__(self):
         self.connection = None
