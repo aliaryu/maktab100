@@ -59,3 +59,27 @@ class DBManager:
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
+    def execute_query(self, query, params=None):
+        if not self.connection:
+            self.connect()
+        if params:
+            self.cursor.execute(query, params)
+        else:
+            self.cursor.execute(query)
+
+    def commit_query(self):
+        if self.connection:
+            self.connection.commit()
+        else:
+            raise psycopg2.Error("There is no connection or a query has not been performed")
+
+    def fetch_one(self):
+        if self.connection:
+            return self.cursor.fetchone()
+        raise psycopg2.Error("There is no connection or a query has not been performed")
+
+    def fetch_all(self):
+        if self.connection:
+            return self.cursor.fetchall()
+        raise psycopg2.Error("There is no connection or a query has not been performed")
+
