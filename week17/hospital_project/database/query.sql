@@ -36,3 +36,23 @@ CREATE TABLE patients (
     medical_record_number INT UNIQUE NOT NULL
     -- blood type, allergy, etc ...
 );
+
+CREATE TABLE appointments (
+    appointment_id SERIAL PRIMARY KEY,
+    doctor_id INT REFERENCES doctors (doctor_id),
+    appointment_date DATE NOT NULL,
+    appointment_time TIME NOT NULL,
+    cost DECIMAL(10, 2) NOT NULL,
+    available BOOLEAN DEFAULT TRUE NOT NULL
+    -- room number, cancel bool, etc ...
+);
+
+CREATE TABLE visits (
+    visit_id SERIAL PRIMARY KEY,
+    appointment_id INT REFERENCES appointments (appointment_id),
+    patient_id INT REFERENCES patients (patient_id),
+    paid BOOLEAN DEFAULT FALSE NOT NULL
+    -- payment methods, bank number, etc ...
+    -- OR: create payment table
+);
+
