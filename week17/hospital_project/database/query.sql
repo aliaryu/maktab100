@@ -14,3 +14,25 @@ CREATE TABLE users (
     delete BOOLEAN DEFAULT FALSE NOT NULL
     -- phone, address, etc ...
 );
+
+CREATE TABLE admins (
+    admin_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users (user_id),
+    position VARCHAR (100) NOT NULL
+    -- permission, group, etc ...
+);
+
+CREATE TABLE doctors (
+    doctor_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users (user_id),
+    specialization VARCHAR (100) NOT NULL,
+    medical_license_number INT UNIQUE NOT NULL
+    -- education, university, etc ...
+);
+
+CREATE TABLE patients (
+    patient_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users (user_id),
+    medical_record_number INT UNIQUE NOT NULL
+    -- blood type, allergy, etc ...
+);
