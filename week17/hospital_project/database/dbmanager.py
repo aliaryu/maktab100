@@ -44,3 +44,11 @@ class DBManager:
             queries = file.read()
         self.execute_query(queries)
         self.commit_query()
+
+    def close(self):
+        if self.connection:
+            self.connection.close()
+            self.connection = None
+        if self.cursor:
+            self.cursor.close()
+            self.cursor = None
