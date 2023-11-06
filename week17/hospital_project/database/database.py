@@ -1,4 +1,5 @@
 from dbmanager import DBManager
+import os; os.system("cls")
 
 
 class Admin:
@@ -28,7 +29,7 @@ class Admin:
             paid = true GROUP BY fullname, specialization;"""
             db.execute_query(query)
             return db.fetch_all()
-    
+
     @staticmethod
     def income_daily():
         with DBManager() as db:
@@ -64,12 +65,17 @@ class Admin:
             db.execute_query(query)
             return db.fetch_all()
         
+    @staticmethod
+    def active_user(user_id):
+        with DBManager() as db:
+            query = """UPDATE users SET active = TRUE WHERE user_id = %s"""
+            db.execute_query(query, (user_id,))
+            db.commit_query()
 
 
 
     
 
-from datetime import datetime
 
 # ---- ADMIN --------
 # # Admin.list_patients
@@ -109,4 +115,6 @@ from datetime import datetime
 #     print("\n----------\n")
 #     for index, title in enumerate(titles):
 #         print(title.ljust(30), user[index])
-    
+
+# # Admin.active_user
+# Admin.active_user(2)
