@@ -177,6 +177,14 @@ class Patient:
             db.execute_query(query_appointments, (appointment_id,))
             db.commit_query()
 
+    @staticmethod
+    def visit_history(patient_id):
+        with DBManager() as db:
+            query = """SELECT v.visit_id, a.appointment_date, a.appointment_time, a.cost, u.fullname as
+            doctor FROM visits v JOIN appointments a ON v.appointment_id = a.appointment_id JOIN doctors
+            d ON a.doctor_id = d.doctor_id JOIN users u ON d.user_id = u.user_id WHERE patient_id = %s;"""
+            db.execute_query(query, (patient_id,))
+            return db.fetch_all()
 
 
 # ---- USER --------
@@ -262,3 +270,9 @@ class Patient:
 
 # # Patient.reserve_visit
 # Patient.reserve_visit(2, 9)
+
+# # Patient.visit_history
+# result = Patient.visit_history(9)
+# print("visit_id".ljust(10), "date".ljust(15), "time".ljust(15), "cost".ljust(10), "doctor".ljust(20), "\n")
+# for visit in result:
+#     print(str(visit[0]).ljust(10), str(visit[1]).ljust(15), str(visit[2]).ljust(15), str(visit[3]).ljust(10), visit[4].ljust(20))
