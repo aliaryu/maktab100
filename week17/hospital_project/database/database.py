@@ -6,10 +6,18 @@ import os; os.system("cls")
 def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), b'$2b$12$0KdMmFngvGhqBI0CMM/Lp.')
 
-# print(bcrypt.checkpw("1".encode('utf-8'), hash_password("1")))
-
 
 class User:
+
+    @staticmethod
+    def sign_in(username, password):
+        with DBManager() as db:
+            query = """SELECT * FROM users WHERE username = %s"""
+            db.execute_query(query, (username,))
+            result = db.fetch_one()
+            if result:
+                if bcrypt.checkpw(password.encode("utf-8"), bytes(result[6])):
+                    return result
 
     @staticmethod
     def sign_up_doctor(fullname, email, date_of_birth, gender, username, password,
@@ -28,6 +36,7 @@ class User:
     @staticmethod
     def sign_up_patient(fullname, email, date_of_birth, gender, username, password,
                         medical_record_number):
+        password = hash_password(password)
         with DBManager() as db:
             query_users = """INSERT INTO users (fullname, email, date_of_birth, gender,
             username, password, role) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING user_id"""
@@ -144,10 +153,12 @@ class Admin:
 # # User.sign_up_doctor
 # User.sign_up_doctor("mobin snowa", "mobin@gmail.com", "2000-01-01", "male", "mobin", "1", "psycology", "123456783")
 
-# User.sign_up_patient
-User.sign_up_patient("bimar 10", "bimar10@gmail.com", "1999-09-09", "male", "bimar10", "1", 12345430)
+# # User.sign_up_patient
+# User.sign_up_patient("bimar 10", "bimar10@gmail.com", "1999-09-09", "male", "bimar10", "1", 12345430)
 
-
+# # User.sign_in
+# result = User.sign_in("aliaryu", "1")
+# print(result)
 
 # ---- ADMIN --------
 # # Admin.list_patients
