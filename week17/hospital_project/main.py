@@ -44,6 +44,8 @@ def show_about():
     affordable services to patients.The International Patients Department (IPD) of
     Ebnesina Hospital is specially equipped for admitting foreign patients in accordance
     with the medical tourism rules and regulations of the Ministry of Health of Heaven.
+    
+                           Designed by: aliaryu@yahoo.com
     '''
     print(about)
     input("\nPress 'Enter' to continue ...")
