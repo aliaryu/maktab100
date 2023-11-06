@@ -1,5 +1,12 @@
 from dbmanager import DBManager
+import bcrypt
 import os; os.system("cls")
+
+
+def hash_password(password):
+    return bcrypt.hashpw(password.encode('utf-8'), b'$2b$12$0KdMmFngvGhqBI0CMM/Lp.')
+
+# print(bcrypt.checkpw("1".encode('utf-8'), hash_password("1")))
 
 
 # class User:
@@ -98,6 +105,7 @@ class Admin:
     @staticmethod
     def create_admin(fullname, email, date_of_birth, gender, username, password, role,
                      superuser, active, position):
+        password = hash_password(password)
         with DBManager() as db:
             query_users = """INSERT INTO users (fullname, email, date_of_birth, gender, username,
             password, role, superuser, active) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
