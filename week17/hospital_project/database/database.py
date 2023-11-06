@@ -44,10 +44,24 @@ class Admin:
     def income_weekly():
         with DBManager() as db:
             query = """SELECT SUM(cost) AS income_weekly FROM visits v JOIN appointments a ON
-            v.appointment_id = a.appointment_id WHERE v.paid_date >= NOW() - INTERVAL
-            '1 week' AND v.paid_date < NOW() AND v.paid = TRUE;"""
+            v.appointment_id = a.appointment_id WHERE v.paid_date >= NOW() - INTERVAL '1 week'
+            AND v.paid_date < NOW() AND v.paid = TRUE;"""
             db.execute_query(query)
             return db.fetch_one()[0]
+        
+    @staticmethod
+    def income_monthly():
+        with DBManager() as db:
+            query = """SELECT SUM(cost) AS income_monthly FROM visits v JOIN appointments a ON
+            v.appointment_id = a.appointment_id WHERE v.paid_date >= NOW() - INTERVAL '1 month'
+            AND v.paid_date < NOW() AND v.paid = TRUE;"""
+            db.execute_query(query)
+            return db.fetch_one()[0]
+        
+
+
+
+    
 
 
 # # Admin.list_patients
@@ -74,4 +88,8 @@ class Admin:
 
 # # Admin.income_weekly
 # result = Admin.income_weekly()
+# print(f"Weekly Income: {result}")
+
+# # Admin.income_monthly
+# result = Admin.income_monthly()
 # print(f"Weekly Income: {result}")
