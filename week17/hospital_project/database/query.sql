@@ -63,11 +63,9 @@ CREATE TABLE visits (
 INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
 VALUES ('ali aryu', 'aliaryu@yahoo.com', '1997-4-22', 'male', 'aliaryu', '1', 'admin', TRUE, TRUE, FALSE);
 INSERT INTO admins (user_id, position) VALUES (1, 'super user operator');
-
 INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
 VALUES ('rostam dastan', 'rostam@gmail.com', '1980-08-17', 'male', 'rostam', '1', 'admin', FALSE, TRUE, FALSE);
 INSERT INTO admins (user_id, position) VALUES (2, 'security');
-
 INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
 VALUES ('artmis daryasalar', 'artmis@gmail.com', '1996-04-03', 'female', 'artmis', '1', 'admin', FALSE, TRUE, FALSE);
 INSERT INTO admins (user_id, position) VALUES (3, 'financial');
@@ -76,51 +74,13 @@ INSERT INTO admins (user_id, position) VALUES (3, 'financial');
 INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
 VALUES ('hasti mehraban', 'hasti@gmail.com', '2003-02-28', 'female', 'hasti', '1', 'doctor', FALSE, TRUE, FALSE);
 INSERT INTO doctors (user_id, specialization, medical_license_number) VALUES (4, 'beauty', 1111111111);
-
 INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
 VALUES ('majid samii', 'majid@gmail.com', '1965-05-15', 'male', 'majid', '1', 'doctor', FALSE, TRUE, FALSE);
 INSERT INTO doctors (user_id, specialization, medical_license_number) VALUES (5, 'cardiovascular', 2222222222);
-
 INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
 VALUES ('nikan hadadi', 'nikan@gmail.com', '1991-10-11', 'male', 'nikan', '1', 'doctor', FALSE, TRUE, FALSE);
 INSERT INTO doctors (user_id, specialization, medical_license_number) VALUES (6, 'otorhinolaryngology', 3333333333);
 
-
-INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('bimar 1', 'b1@gmail.com', '2001-01-01', 'male', 'bimar1', '1', 'patient', FALSE, TRUE, FALSE);
-INSERT INTO patients (user_id, medical_record_number) VALUES (7, 1111110);
-
-INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('bimar 2', 'b2@gmail.com', '2002-02-02', 'female', 'bimar2', '1', 'patient', FALSE, TRUE, FALSE);
-INSERT INTO patients (user_id, medical_record_number) VALUES (8, 2222220);
-
-INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('bimar 3', 'b3@gmail.com', '2003-03-03', 'male', 'bimar3', '1', 'patient', FALSE, TRUE, FALSE);
-INSERT INTO patients (user_id, medical_record_number) VALUES (9, 3333330);
-
-INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('bimar 4', 'b4@gmail.com', '2004-04-04', 'female', 'bimar4', '1', 'patient', FALSE, TRUE, FALSE);
-INSERT INTO patients (user_id, medical_record_number) VALUES (10, 4444440);
-
-INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('bimar 5', 'b5@gmail.com', '2005-05-05', 'male', 'bimar5', '1', 'patient', FALSE, TRUE, FALSE);
-INSERT INTO patients (user_id, medical_record_number) VALUES (11, 5555550);
-
-INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('bimar 6', 'b6@gmail.com', '2006-06-06', 'female', 'bimar6', '1', 'patient', FALSE, TRUE, FALSE);
-INSERT INTO patients (user_id, medical_record_number) VALUES (12, 6666660);
-
-INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('bimar 7', 'b7@gmail.com', '2007-07-07', 'male', 'bimar7', '1', 'patient', FALSE, TRUE, FALSE);
-INSERT INTO patients (user_id, medical_record_number) VALUES (13, 7777770);
-
-INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('bimar 8', 'b8@gmail.com', '2008-08-08', 'female', 'bimar8', '1', 'patient', FALSE, TRUE, FALSE);
-INSERT INTO patients (user_id, medical_record_number) VALUES (14, 8888880);
-
-INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('bimar 9', 'b9@gmail.com', '2009-09-09', 'male', 'bimar9', '1', 'patient', FALSE, TRUE, FALSE);
-INSERT INTO patients (user_id, medical_record_number) VALUES (15, 9999990);
 
 INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
 VALUES (1, CURRENT_DATE + INTERVAL '1 day', '09:00:00', 100.00);
@@ -294,3 +254,50 @@ INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
 VALUES (3, CURRENT_DATE + INTERVAL '2 day', '16:45:00', 30.00);
 
 
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('bimar 1', 'b1@gmail.com', '2001-01-01', 'male', 'bimar1', '1', 'patient', FALSE, TRUE, FALSE);
+INSERT INTO patients (user_id, medical_record_number) VALUES (7, 1111110);
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('bimar 2', 'b2@gmail.com', '2002-02-02', 'female', 'bimar2', '1', 'patient', FALSE, TRUE, FALSE);
+INSERT INTO patients (user_id, medical_record_number) VALUES (8, 2222220);
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('bimar 3', 'b3@gmail.com', '2003-03-03', 'male', 'bimar3', '1', 'patient', FALSE, TRUE, FALSE);
+INSERT INTO patients (user_id, medical_record_number) VALUES (9, 3333330);
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('bimar 4', 'b4@gmail.com', '2004-04-04', 'female', 'bimar4', '1', 'patient', FALSE, TRUE, FALSE);
+INSERT INTO patients (user_id, medical_record_number) VALUES (10, 4444440);
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('bimar 5', 'b5@gmail.com', '2005-05-05', 'male', 'bimar5', '1', 'patient', FALSE, TRUE, FALSE);
+INSERT INTO patients (user_id, medical_record_number) VALUES (11, 5555550);
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('bimar 6', 'b6@gmail.com', '2006-06-06', 'female', 'bimar6', '1', 'patient', FALSE, TRUE, FALSE);
+INSERT INTO patients (user_id, medical_record_number) VALUES (12, 6666660);
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('bimar 7', 'b7@gmail.com', '2007-07-07', 'male', 'bimar7', '1', 'patient', FALSE, TRUE, FALSE);
+INSERT INTO patients (user_id, medical_record_number) VALUES (13, 7777770);
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('bimar 8', 'b8@gmail.com', '2008-08-08', 'female', 'bimar8', '1', 'patient', FALSE, TRUE, FALSE);
+INSERT INTO patients (user_id, medical_record_number) VALUES (14, 8888880);
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('bimar 9', 'b9@gmail.com', '2009-09-09', 'male', 'bimar9', '1', 'patient', FALSE, TRUE, FALSE);
+INSERT INTO patients (user_id, medical_record_number) VALUES (15, 9999990);
+
+
+INSERT INTO visits (appointment_id, patient_id, paid) VALUES (1,  1, true);
+UPDATE appointments SET available = false WHERE appointment_id = 1;
+INSERT INTO visits (appointment_id, patient_id, paid) VALUES (25, 2, true);
+UPDATE appointments SET available = false WHERE appointment_id = 25;
+INSERT INTO visits (appointment_id, patient_id, paid) VALUES (27, 3, true);
+UPDATE appointments SET available = false WHERE appointment_id = 27;
+INSERT INTO visits (appointment_id, patient_id, paid) VALUES (37, 4, true);
+UPDATE appointments SET available = false WHERE appointment_id = 37;
+INSERT INTO visits (appointment_id, patient_id, paid) VALUES (38, 5, true);
+UPDATE appointments SET available = false WHERE appointment_id = 38;
+INSERT INTO visits (appointment_id, patient_id, paid) VALUES (40, 6, true);
+UPDATE appointments SET available = false WHERE appointment_id = 40;
+INSERT INTO visits (appointment_id, patient_id, paid) VALUES (54, 7, true);
+UPDATE appointments SET available = false WHERE appointment_id = 54;
+INSERT INTO visits (appointment_id, patient_id, paid) VALUES (55, 8, true);
+UPDATE appointments SET available = false WHERE appointment_id = 55;
+INSERT INTO visits (appointment_id, patient_id, paid) VALUES (56, 9, true);
+UPDATE appointments SET available = false WHERE appointment_id = 56;
