@@ -68,11 +68,17 @@ class Admin:
     @staticmethod
     def active_user(user_id):
         with DBManager() as db:
-            query = """UPDATE users SET active = TRUE WHERE user_id = %s"""
+            query = """UPDATE users SET active = TRUE, delete = FALSE WHERE user_id = %s"""
             db.execute_query(query, (user_id,))
             db.commit_query()
 
-
+    @staticmethod
+    def show_all_users():
+        with DBManager() as db:
+            query = """SELECT user_id, fullname, email, date_of_birth, gender, username, role,
+            superuser, active, delete FROM users LIMIT 50;"""
+            db.execute_query(query)
+            return db.fetch_all()
 
     
 
@@ -118,3 +124,11 @@ class Admin:
 
 # # Admin.active_user
 # Admin.active_user(2)
+
+# # Admin.show_all_users
+# result = Admin.show_all_users()
+# titles = ["id", "fullname", "email", "date_of_birth", "gender", "username", "role", "superuser", "active", "delete"]
+# for user in result:
+#     print("\n----------\n")
+#     for index, title in enumerate(titles):
+#         print(title.ljust(30), user[index])
