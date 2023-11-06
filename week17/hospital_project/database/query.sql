@@ -52,7 +52,8 @@ CREATE TABLE visits (
     visit_id BIGSERIAL PRIMARY KEY,
     appointment_id BIGINT REFERENCES appointments (appointment_id),
     patient_id BIGINT REFERENCES patients (patient_id),
-    paid BOOLEAN DEFAULT FALSE NOT NULL
+    paid BOOLEAN DEFAULT FALSE NOT NULL,
+    paid_date DATE NOT NULL
     -- payment methods, bank number, etc ...
     -- OR: create payment table
 );
@@ -284,21 +285,21 @@ VALUES ('bimar 9', 'b9@gmail.com', '2009-09-09', 'male', 'bimar9', '1', 'patient
 INSERT INTO patients (user_id, medical_record_number) VALUES (15, 9999990);
 
 
-INSERT INTO visits (appointment_id, patient_id, paid) VALUES (1,  1, true);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (1,  1, true, CURRENT_DATE);
 UPDATE appointments SET available = false WHERE appointment_id = 1;
-INSERT INTO visits (appointment_id, patient_id, paid) VALUES (25, 2, true);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (25, 2, true, CURRENT_DATE);
 UPDATE appointments SET available = false WHERE appointment_id = 25;
-INSERT INTO visits (appointment_id, patient_id, paid) VALUES (27, 3, true);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (27, 3, true, CURRENT_DATE);
 UPDATE appointments SET available = false WHERE appointment_id = 27;
-INSERT INTO visits (appointment_id, patient_id, paid) VALUES (37, 4, true);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (37, 4, true, CURRENT_DATE);
 UPDATE appointments SET available = false WHERE appointment_id = 37;
-INSERT INTO visits (appointment_id, patient_id, paid) VALUES (38, 5, true);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (38, 5, true, CURRENT_DATE);
 UPDATE appointments SET available = false WHERE appointment_id = 38;
-INSERT INTO visits (appointment_id, patient_id, paid) VALUES (40, 6, true);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (40, 6, true, CURRENT_DATE);
 UPDATE appointments SET available = false WHERE appointment_id = 40;
-INSERT INTO visits (appointment_id, patient_id, paid) VALUES (54, 7, true);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (54, 7, true, CURRENT_DATE);
 UPDATE appointments SET available = false WHERE appointment_id = 54;
-INSERT INTO visits (appointment_id, patient_id, paid) VALUES (55, 8, true);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (55, 8, true, CURRENT_DATE);
 UPDATE appointments SET available = false WHERE appointment_id = 55;
-INSERT INTO visits (appointment_id, patient_id, paid) VALUES (56, 9, true);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (56, 9, true, CURRENT_DATE);
 UPDATE appointments SET available = false WHERE appointment_id = 56;
