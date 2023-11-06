@@ -1,4 +1,4 @@
--- Hospital DataBase Queries
+-- Hospital DataBase Queries --
 
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
@@ -13,6 +13,7 @@ CREATE TABLE users (
     active BOOLEAN DEFAULT FALSE NOT NULL,
     delete BOOLEAN DEFAULT FALSE NOT NULL
     -- phone, address, etc ...
+    -- OR: create role table
 );
 
 CREATE TABLE admins (
@@ -57,10 +58,23 @@ CREATE TABLE visits (
 );
 
 
--- Initial Queries For Testing
+-- Initial Queries For Testing --
 
 INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('ali aryu', 'aliaryu@yahoo.com', '1997-4-22', 'male', 'aliaryu', '1234', 'admin', TRUE, TRUE, FALSE);
+VALUES ('ali aryu', 'aliaryu@yahoo.com', '1997-4-22', 'male', 'aliaryu', '1', 'admin', TRUE, TRUE, FALSE);
+INSERT INTO admins (user_id, position) VALUES (1, 'super user operator');
+
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('rostam dastan', 'rostam@dastan.com', '1980-08-17', 'male', 'rostam', '1', 'admin', FALSE, TRUE, FALSE);
+INSERT INTO admins (user_id, position) VALUES (2, 'security');
+
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('artmis shah', 'artmis@shah.com', '1996-04-03', 'female', 'artmis', '1', 'admin', FALSE, TRUE, FALSE);
+INSERT INTO admins (user_id, position) VALUES (2, 'financial');
+
+
+
+
 
 
 
