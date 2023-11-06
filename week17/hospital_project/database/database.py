@@ -167,11 +167,16 @@ class Patient:
             db.execute_query(query, (doctor_id,))
             return db.fetch_all()
 
+    @staticmethod
+    def reserve_visit(appointment_id, patient_id):
+        with DBManager() as db:
+            query_visits = """INSERT INTO visits (appointment_id, patient_id, paid, paid_date)
+            VALUES (%s, %s, TRUE, CURRENT_DATE)"""
+            query_appointments = """UPDATE appointments SET available = FALSE WHERE appointment_id = %s"""
+            db.execute_query(query_visits, (appointment_id, patient_id))
+            db.execute_query(query_appointments, (appointment_id,))
+            db.commit_query()
 
-    # @staticmethod
-    # def reserve_visit():
-    #     with DBManager() as db:
-    #         query = """INSERT INTO visits (appointment_id, )"""
 
 
 # ---- USER --------
@@ -254,3 +259,6 @@ class Patient:
 # print("number".ljust(8), "date".ljust(15), "time".ljust(15), "cost".ljust(10), "\n")
 # for index, appointment in enumerate(result):
 #     print(str(index + 1).ljust(8), str(appointment[1]).ljust(15), str(appointment[2]).ljust(15), str(appointment[3]).ljust(10))
+
+# # Patient.reserve_visit
+# Patient.reserve_visit(2, 9)
