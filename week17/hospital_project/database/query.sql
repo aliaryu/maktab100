@@ -122,11 +122,175 @@ INSERT INTO users (fullname, email, date_of_birth, gender, username, password, r
 VALUES ('bimar 9', 'b9@gmail.com', '2009-09-09', 'male', 'bimar9', '1', 'patient', FALSE, TRUE, FALSE);
 INSERT INTO patients (user_id, medical_record_number) VALUES (15, 9999990);
 
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '09:00:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '09:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '10:0:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '10:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '11:00:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '11:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '14:00:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '14:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '15:00:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '15:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '16:00:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '1 day', '16:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '09:00:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '09:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '10:0:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '10:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '11:00:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '11:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '14:00:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '14:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '15:00:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '15:30:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '16:00:00', 100.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (1, CURRENT_DATE + INTERVAL '2 day', '16:30:00', 100.00);
 
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '1 day', '09:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '1 day', '10:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '1 day', '11:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '1 day', '14:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '1 day', '15:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '1 day', '16:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '2 day', '09:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '2 day', '10:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '2 day', '11:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '2 day', '14:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '2 day', '15:00:00', 70.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (2, CURRENT_DATE + INTERVAL '2 day', '16:00:00', 70.00);
 
-
-
-
-
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '09:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '09:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '09:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '09:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '10:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '10:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '10:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '10:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '11:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '11:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '11:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '11:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '14:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '14:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '14:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '14:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '15:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '15:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '15:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '15:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '16:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '16:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '16:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '1 day', '16:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '09:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '09:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '09:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '09:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '10:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '10:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '10:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '10:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '11:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '11:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '11:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '11:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '14:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '14:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '14:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '14:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '15:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '15:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '15:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '15:45:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '16:00:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '16:15:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '16:30:00', 30.00);
+INSERT INTO appointments (doctor_id, appointment_date, appointment_time, cost)
+VALUES (3, CURRENT_DATE + INTERVAL '2 day', '16:45:00', 30.00);
 
 
