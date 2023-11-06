@@ -9,12 +9,22 @@ def hash_password(password):
 # print(bcrypt.checkpw("1".encode('utf-8'), hash_password("1")))
 
 
-# class User:
+class User:
 
-    # @staticmethod
-    # def sign_up_admin(fullname, email, date_of_birth, gender, username, password, role, position):
-    #     pass
-
+    @staticmethod
+    def sign_up_doctor(fullname, email, date_of_birth, gender, username, password,
+                       specialization, medical_license_number):
+        password = hash_password(password)
+        with DBManager() as db:
+            query_users = """INSERT INTO users (fullname, email, date_of_birth, gender,
+            username, password, role) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING user_id"""
+            query_doctors = """INSERT INTO doctors (user_id, specialization, medical_license_number)
+            VALUES (%s, %s, %s)"""
+            db.execute_query(query_users, (fullname, email, date_of_birth, gender, username,
+                                            password, "doctor"))
+            db.execute_query(query_doctors, (db.fetch_one()[0], specialization, medical_license_number))
+            db.commit_query()
+        
 
 
 class Admin:
@@ -103,8 +113,8 @@ class Admin:
             db.commit_query()
 
     @staticmethod
-    def create_admin(fullname, email, date_of_birth, gender, username, password, role,
-                     superuser, active, position):
+    def create_admin(fullname, email, date_of_birth, gender, username, password, superuser,
+                     active, position):
         password = hash_password(password)
         with DBManager() as db:
             query_users = """INSERT INTO users (fullname, email, date_of_birth, gender, username,
@@ -112,13 +122,16 @@ class Admin:
             RETURNING user_id"""
             query_admins = """INSERT INTO admins (user_id, position) VALUES (%s, %s)"""
             db.execute_query(query_users, (fullname, email, date_of_birth, gender, username,
-                                           password, role, superuser, active))
+                                           password, "admin", superuser, active))
             db.execute_query(query_admins, (db.fetch_one()[0], position))
             db.commit_query()
 
 
 
-# ---- DOCTOR --------
+# ---- USER --------
+# # User.sign_up_doctor
+# User.sign_up_doctor("mobin snowa", "mobin@gmail.com", "2000-01-01", "male", "mobin", "1", "psycology", "123456783")
+
 
 
 # ---- ADMIN --------
@@ -175,4 +188,4 @@ class Admin:
 # Admin.delete_user(2)
 
 # # Admin.create_admin
-# Admin.create_admin("donya monya", "donya@gmail.com", "1998-01-19", "female", "donya", "1", "admin", False, True, "watcher")
+# Admin.create_admin("donya monya", "donya@gmail.com", "1998-01-19", "female", "donya", "1", False, True, "watcher")
