@@ -79,8 +79,14 @@ class Admin:
             superuser, active, delete FROM users LIMIT 50;"""
             db.execute_query(query)
             return db.fetch_all()
-
     
+    @staticmethod
+    def delete_user(user_id):
+        with DBManager() as db:
+            query = """UPDATE users SET delete = TRUE WHERE user_id = %s"""
+            db.execute_query(query, (user_id,))
+            db.commit_query()
+
 
 
 # ---- ADMIN --------
@@ -132,3 +138,6 @@ class Admin:
 #     print("\n----------\n")
 #     for index, title in enumerate(titles):
 #         print(title.ljust(30), user[index])
+
+# Admin.delete_user
+# Admin.delete_user(2)
