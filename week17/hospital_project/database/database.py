@@ -148,6 +148,23 @@ class Admin:
             db.commit_query()
 
 
+class Patient:
+
+    @staticmethod
+    def show_all_doctors():
+        with DBManager() as db:
+            query = """SELECT d.doctor_id, u.fullname, d.specialization FROM users u JOIN doctors d
+            ON u.user_id = d.user_id"""
+            db.execute_query(query)
+            return db.fetch_all()
+
+    
+
+    # @staticmethod
+    # def reserve_visit():
+    #     with DBManager() as db:
+    #         query = """INSERT INTO visits (appointment_id, )"""
+
 
 # ---- USER --------
 # # User.sign_up_doctor
@@ -215,3 +232,10 @@ class Admin:
 
 # # Admin.create_admin
 # Admin.create_admin("donya monya", "donya@gmail.com", "1998-01-19", "female", "donya", "1", False, True, "watcher")
+
+# ---- PATIENT --------
+# # Patient.show_all_doctors
+# result = Patient.show_all_doctors()
+# print("number".ljust(8), "fullname".ljust(20), "specialization".ljust(20))
+# for index, doctor in enumerate(result):
+#     print(str(index + 1).ljust(8), doctor[1].ljust(20), doctor[2].ljust(20))
