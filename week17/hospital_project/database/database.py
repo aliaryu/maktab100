@@ -1,7 +1,5 @@
 from dbmanager import DBManager
 
-from datetime import datetime
-
 
 class Admin:
 
@@ -12,7 +10,7 @@ class Admin:
             FROM users u JOIN patients p ON u.user_id = p.user_id LIMIT 50;"""
             db.execute_query(query)
             return db.fetch_all()
-        
+
     @staticmethod
     def list_doctors():
         with DBManager() as db:
@@ -57,13 +55,23 @@ class Admin:
             AND v.paid_date < NOW() AND v.paid = TRUE;"""
             db.execute_query(query)
             return db.fetch_one()[0]
+    
+    @staticmethod
+    def show_inactive_users():
+        with DBManager() as db:
+            query = """SELECT user_id, fullname, email, date_of_birth, gender, username, role,
+            superuser, active, delete FROM users WHERE active = FALSE LIMIT 10;"""
+            db.execute_query(query)
+            return db.fetch_all()
         
 
 
 
     
 
+from datetime import datetime
 
+# ---- ADMIN --------
 # # Admin.list_patients
 # result = Admin.list_patients()
 # print("fullname".ljust(20), "date_of_birth".ljust(15), "gender".ljust(8), "medical_record_number".ljust(10), "\n")
@@ -93,3 +101,12 @@ class Admin:
 # # Admin.income_monthly
 # result = Admin.income_monthly()
 # print(f"Weekly Income: {result}")
+
+# # Admin.show_inactive_users
+# result = Admin.show_inactive_users()
+# titles = ["id", "fullname", "email", "date_of_birth", "gender", "username", "role", "superuser", "active", "delete"]
+# for user in result:
+#     print("\n----------\n")
+#     for index, title in enumerate(titles):
+#         print(title.ljust(30), user[index])
+    
