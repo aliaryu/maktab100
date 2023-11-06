@@ -2,6 +2,14 @@ from dbmanager import DBManager
 import os; os.system("cls")
 
 
+# class User:
+
+    # @staticmethod
+    # def sign_up_admin(fullname, email, date_of_birth, gender, username, password, role, position):
+    #     pass
+
+
+
 class Admin:
 
     @staticmethod
@@ -87,6 +95,22 @@ class Admin:
             db.execute_query(query, (user_id,))
             db.commit_query()
 
+    @staticmethod
+    def create_admin(fullname, email, date_of_birth, gender, username, password, role,
+                     superuser, active, position):
+        with DBManager() as db:
+            query_users = """INSERT INTO users (fullname, email, date_of_birth, gender, username,
+            password, role, superuser, active) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING user_id"""
+            query_admins = """INSERT INTO admins (user_id, position) VALUES (%s, %s)"""
+            db.execute_query(query_users, (fullname, email, date_of_birth, gender, username,
+                                           password, role, superuser, active))
+            db.execute_query(query_admins, (db.fetch_one()[0], position))
+            db.commit_query()
+
+
+
+# ---- DOCTOR --------
 
 
 # ---- ADMIN --------
@@ -141,3 +165,6 @@ class Admin:
 
 # Admin.delete_user
 # Admin.delete_user(2)
+
+# # Admin.create_admin
+# Admin.create_admin("donya monya", "donya@gmail.com", "1998-01-19", "female", "donya", "1", "admin", False, True, "watcher")
