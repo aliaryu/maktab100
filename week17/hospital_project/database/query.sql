@@ -7,7 +7,7 @@ CREATE TABLE users (
     date_of_birth DATE NOT NULL,
     gender VARCHAR (10) NOT NULL,
     username VARCHAR (100) UNIQUE NOT NULL,
-    password VARCHAR (255) NOT NULL,
+    password BYTEA NOT NULL,
     role VARCHAR (50) NOT NULL,
     superuser BOOLEAN DEFAULT FALSE NOT NULL,
     active BOOLEAN DEFAULT FALSE NOT NULL,
