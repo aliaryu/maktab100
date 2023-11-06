@@ -73,6 +73,20 @@ VALUES ('artmis daryasalar', 'artmis@daryasalar.com', '1996-04-03', 'female', 'a
 INSERT INTO admins (user_id, position) VALUES (3, 'financial');
 
 
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('hasti mehraban', 'hasti@mehraban.com', '2003-02-28', 'female', 'hasti', '1', 'doctor', FALSE, TRUE, FALSE);
+INSERT INTO doctors (user_id, specialization, medical_license_number) VALUES (4, 'beauty', 1111111111);
+
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('majid samii', 'majid@samii.com', '1965-05-15', 'male', 'majid', '1', 'doctor', FALSE, TRUE, FALSE);
+INSERT INTO doctors (user_id, specialization, medical_license_number) VALUES (5, 'cardiovascular', 2222222222);
+
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('nikan hadadi', 'nikan@hadadi.com', '1991-10-11', 'male', 'nikan', '1', 'doctor', FALSE, TRUE, FALSE);
+INSERT INTO doctors (user_id, specialization, medical_license_number) VALUES (6, 'otorhinolaryngology', 3333333333);
+
+
+
 
 
 
