@@ -56,3 +56,16 @@ CREATE TABLE visits (
     -- OR: create payment table
 );
 
+
+-- Initial Queries For Testing
+
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('ali aryu', 'aliaryu@yahoo.com', '1997-4-22', 'male', 'aliaryu', '1234', 'admin', TRUE, TRUE, FALSE);
+
+
+
+
+
+
+
+
