@@ -24,7 +24,19 @@ class User:
                                             password, "doctor"))
             db.execute_query(query_doctors, (db.fetch_one()[0], specialization, medical_license_number))
             db.commit_query()
-        
+
+    @staticmethod
+    def sign_up_patient(fullname, email, date_of_birth, gender, username, password,
+                        medical_record_number):
+        with DBManager() as db:
+            query_users = """INSERT INTO users (fullname, email, date_of_birth, gender,
+            username, password, role) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING user_id"""
+            query_patients = """INSERT INTO patients (user_id, medical_record_number)
+            VALUES (%s, %s)"""
+            db.execute_query(query_users, (fullname, email, date_of_birth, gender, username,
+                                            password, "patient"))
+            db.execute_query(query_patients, (db.fetch_one()[0], medical_record_number))
+            db.commit_query()
 
 
 class Admin:
@@ -131,6 +143,9 @@ class Admin:
 # ---- USER --------
 # # User.sign_up_doctor
 # User.sign_up_doctor("mobin snowa", "mobin@gmail.com", "2000-01-01", "male", "mobin", "1", "psycology", "123456783")
+
+# User.sign_up_patient
+User.sign_up_patient("bimar 10", "bimar10@gmail.com", "1999-09-09", "male", "bimar10", "1", 12345430)
 
 
 
