@@ -50,7 +50,7 @@ CREATE TABLE appointments (
 
 CREATE TABLE visits (
     visit_id BIGSERIAL PRIMARY KEY,
-    appointment_id BIGINT REFERENCES appointments (appointment_id),
+    appointment_id BIGINT REFERENCES appointments (appointment_id) UNIQUE,
     patient_id BIGINT REFERENCES patients (patient_id),
     paid BOOLEAN DEFAULT FALSE NOT NULL,
     paid_date DATE NOT NULL
