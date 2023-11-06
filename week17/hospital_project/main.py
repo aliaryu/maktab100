@@ -12,7 +12,20 @@ def show_contact():
     os.system("cls" if os.name == "nt" else "clear")
 
 def show_about():
-    about = """
+    about = r'''
+                                    _ _.-'`-._ _
+                                   ;.'________'.;
+                        _________n.[____________].n_________
+                       |""_""_""_""||==||==||==||""_""_""_""]
+                       |"""""""""""||..||..||..||"""""""""""|
+                       |LI LI LI LI||LI||LI||LI||LI LI LI LI|
+                       |.. .. .. ..||..||..||..||.. .. .. ..|
+                       |LI LI LI LI||LI||LI||LI||LI LI LI LI|
+                    ,,;;,;;;,;;;,;;;,;;;,;;;,;;;,;;,;;;,;;;,;;,,
+                   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+                              -- Avicenna Hospital --
+
     Born out of the former Ebnesina clinic in June 2001, Ebnesina Hospital, (named after
     Avicenna or Ibn Sina, the great Iranian polymath and physician of the 10th century,)
     is located in Earth district in the west of Heaven; (Ebnesian clinic was itself
@@ -30,7 +43,8 @@ def show_about():
     based on the international standards that are utilized to offer the best and most
     affordable services to patients.The International Patients Department (IPD) of
     Ebnesina Hospital is specially equipped for admitting foreign patients in accordance
-    with the medical tourism rules and regulations of the Ministry of Health of Heaven."""
+    with the medical tourism rules and regulations of the Ministry of Health of Heaven.
+    '''
     print(about)
     input("\nPress 'Enter' to continue ...")
     os.system("cls" if os.name == "nt" else "clear")
