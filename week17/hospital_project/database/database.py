@@ -30,9 +30,16 @@ class Admin:
             paid = true GROUP BY fullname, specialization;"""
             db.execute_query(query)
             return db.fetch_all()
+    
+    @staticmethod
+    def income_daily():
+        with DBManager() as db:
+            query = """SELECT SUM(cost) AS income_daily FROM visits v JOIN appointments a ON
+            v.appointment_id = a.appointment_id WHERE a.appointment_date = CURRENT_DATE AND
+            v.paid = TRUE;"""
+            db.execute_query(query)
+            return db.fetch_one()
         
-
-
 
 
 
@@ -55,3 +62,6 @@ class Admin:
 # for item in result:
 #     print(item[0].ljust(20), item[1].ljust(20), str(item[2]).ljust(20), str(float(item[3])).ljust(10))
 
+# # Admin.income_daily
+# result = Admin.income_daily()
+# print(f"Daily Income: {result[0]}")
