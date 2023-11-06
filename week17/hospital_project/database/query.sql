@@ -57,12 +57,13 @@ CREATE TABLE visits (
     -- OR: create payment table
 );
 
+INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
+VALUES ('ali aryu', 'aliaryu@yahoo.com', '1997-4-22', 'male', 'aliaryu', '1', 'admin', TRUE, TRUE, FALSE);
+INSERT INTO admins (user_id, position) VALUES (1, 'super user operator'); -- This superuser is necessary
+
 
 -- Initial Queries For Testing --
 
-INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('ali aryu', 'aliaryu@yahoo.com', '1997-4-22', 'male', 'aliaryu', '1', 'admin', TRUE, TRUE, FALSE);
-INSERT INTO admins (user_id, position) VALUES (1, 'super user operator');
 INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
 VALUES ('rostam dastan', 'rostam@gmail.com', '1980-08-17', 'male', 'rostam', '1', 'admin', FALSE, TRUE, FALSE);
 INSERT INTO admins (user_id, position) VALUES (2, 'security');
