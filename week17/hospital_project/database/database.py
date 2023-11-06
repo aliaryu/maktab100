@@ -158,7 +158,15 @@ class Patient:
             db.execute_query(query)
             return db.fetch_all()
 
-    
+    @staticmethod
+    def show_doctor_appointments(doctor_id):
+        with DBManager() as db:
+            query = """SELECT a.appointment_id, a.appointment_date, a.appointment_time, a.cost
+            FROM appointments a JOIN doctors d ON a.doctor_id = d.doctor_id WHERE a.available = TRUE
+            AND d.doctor_id = %s"""
+            db.execute_query(query, (doctor_id,))
+            return db.fetch_all()
+
 
     # @staticmethod
     # def reserve_visit():
@@ -236,6 +244,13 @@ class Patient:
 # ---- PATIENT --------
 # # Patient.show_all_doctors
 # result = Patient.show_all_doctors()
-# print("number".ljust(8), "fullname".ljust(20), "specialization".ljust(20))
+# print("number".ljust(8), "fullname".ljust(20), "specialization".ljust(20), "\n")
 # for index, doctor in enumerate(result):
 #     print(str(index + 1).ljust(8), doctor[1].ljust(20), doctor[2].ljust(20))
+
+# # Patient.show_doctor_appointments
+# result = Patient.show_doctor_appointments(3)
+# os.system("cls")
+# print("number".ljust(8), "date".ljust(15), "time".ljust(15), "cost".ljust(10), "\n")
+# for index, appointment in enumerate(result):
+#     print(str(index + 1).ljust(8), str(appointment[1]).ljust(15), str(appointment[2]).ljust(15), str(appointment[3]).ljust(10))
