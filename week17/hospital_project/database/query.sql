@@ -18,14 +18,14 @@ CREATE TABLE users (
 
 CREATE TABLE admins (
     admin_id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users (user_id),
+    user_id INT REFERENCES users (user_id) UNIQUE,
     position VARCHAR (100) NOT NULL
     -- permission, group, etc ...
 );
 
 CREATE TABLE doctors (
     doctor_id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users (user_id),
+    user_id INT REFERENCES users (user_id) UNIQUE,
     specialization VARCHAR (100) NOT NULL,
     medical_license_number INT UNIQUE NOT NULL
     -- education, university, etc ...
@@ -69,8 +69,10 @@ VALUES ('rostam dastan', 'rostam@dastan.com', '1980-08-17', 'male', 'rostam', '1
 INSERT INTO admins (user_id, position) VALUES (2, 'security');
 
 INSERT INTO users (fullname, email, date_of_birth, gender, username, password, role, superuser, active, delete)
-VALUES ('artmis shah', 'artmis@shah.com', '1996-04-03', 'female', 'artmis', '1', 'admin', FALSE, TRUE, FALSE);
-INSERT INTO admins (user_id, position) VALUES (2, 'financial');
+VALUES ('artmis daryasalar', 'artmis@daryasalar.com', '1996-04-03', 'female', 'artmis', '1', 'admin', FALSE, TRUE, FALSE);
+INSERT INTO admins (user_id, position) VALUES (3, 'financial');
+
+
 
 
 
