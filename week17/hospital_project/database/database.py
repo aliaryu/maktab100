@@ -156,6 +156,16 @@ class Doctor:
             cost, available) VALUES (%s, %s, %s, %s, TRUE)"""
             db.execute_query(query, (doctor_id, appointment_date, appointment_time, cost))
             db.commit_query()
+    
+    @staticmethod
+    def show_doctor_visits(doctor_id):
+        with DBManager() as db:
+            query = """SELECT a.appointment_date, a.appointment_time, u.fullname FROM visits v JOIN
+            appointments a ON v.appointment_id = a.appointment_id JOIN patients p ON v.patient_id 
+            = p.patient_id JOIN users u ON p.user_id = u.user_id WHERE a.doctor_id = %s AND
+            a.appointment_date >= CURRENT_DATE AND a.appointment_time > CURRENT_TIME"""
+            db.execute_query(query, (doctor_id,))
+            return db.fetch_all()
 
 
 
@@ -268,6 +278,12 @@ class Patient:
 # ---- DOCTOR --------
 # # Doctor.add_appointment
 # Doctor.add_appointment(1, "2023-11-10", "11:00:00", 150)
+
+# # Doctor.show_doctor_visits
+# result = Doctor.show_doctor_visits(3)
+# print("date".ljust(15), "time".ljust(15), "patient".ljust(20), "\n")
+# for visit in result:
+#     print(str(visit[0]).ljust(15), str(visit[1]).ljust(15), visit[2].ljust(20))
 
 
 # ---- PATIENT --------
