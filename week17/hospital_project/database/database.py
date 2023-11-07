@@ -153,9 +153,10 @@ class Doctor:
     def add_appointment(doctor_id, appointment_date, appointment_time, cost):
         with DBManager() as db:
             query = """INSERT INTO appointments (doctor_id, appointment_date, appointment_time,
-            cost, available) VALUES (%s, %s, %s, %s, TRUE)"""
+            cost, available) VALUES (%s, %s, %s, %s, TRUE) RETURNING appointment_id"""
             db.execute_query(query, (doctor_id, appointment_date, appointment_time, cost))
             db.commit_query()
+            return db.fetch_one()
     
     @staticmethod
     def show_doctor_visits(doctor_id):
