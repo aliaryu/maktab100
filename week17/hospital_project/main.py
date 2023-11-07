@@ -14,7 +14,6 @@ import os
 user_info = None
 
 
-
 def clear_terminal():
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -153,6 +152,42 @@ def show_users_delete():
     else:
         print("Sorry, Only superuser can delete users :]")
 
+def show_inactive_users():
+    result = Admin.show_inactive_users()
+    if result:
+        titles = ["id", "fullname", "email", "date_of_birth", "gender", "username", "role", "superuser", "active", "delete"]
+        for user in result:
+            print("\n----------\n")
+            for index, title in enumerate(titles):
+                print(title.ljust(30), user[index])
+        while True:
+            choice = input("\n1: Active User\n0: Back\n\n >>> ")
+            if choice == "1":
+                clear_terminal()
+                try:
+                    user_id = int(input("Enter User ID: ".ljust(22)))
+                except:
+                    user_id = -1
+                accept  = input("Are you sure? y/n: ".ljust(22)).lower()
+                if accept in {"y", "ye", "yes"}:
+                    output = Admin.delete_user(user_id)
+                    if output:
+                        clear_terminal()
+                        print(f"User with ID '{user_id}' was actived successfully :p")
+                        break
+                    else:
+                        print("You entered a wrong ID -_-")
+                else:
+                    clear_terminal()
+                    print("The active process was canceled.")
+                    break
+            elif choice == "0":
+                break
+            else:
+                clear_terminal()
+                print("Invalid Input..\n")
+    else:
+        print("There are no inactive users -_-")
 
 
 def show_contact():
@@ -204,6 +239,7 @@ admin_menu.add_item(Item("List Doctors", show_list_doctors))
 admin_menu.add_item(Item("List Patients", show_list_patients))
 admin_menu.add_item(Item("Visits Info", show_visits_info))
 admin_menu.add_item(Item("Total Income", show_total_income))
+admin_menu.add_item(Item("Inactive Users", show_inactive_users))
 admin_menu.add_item(Item("Users/Delete", show_users_delete))
 
 
