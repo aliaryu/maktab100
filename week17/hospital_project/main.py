@@ -4,7 +4,7 @@ project_folder = Path(__file__).resolve().parent
 sys.path.append(str(project_folder))
 
 from menu import Menu, Item
-from database.database import User
+from database.database import User, Admin
 import os
 
 
@@ -30,7 +30,7 @@ def show_sign_in():
             if not user_info[10]:
                 print(f"Welcome to {user_info[7]} panel '{user_info[1].title()}' :D\n")
                 if user_info[7] == "admin":
-                    # admin_menu.execute()
+                    admin_menu.execute()
                     pass
                 elif user_info[7] == "doctor":
                     pass
@@ -79,7 +79,15 @@ def show_sign_up():
     else:
         print("The passwords were not the same ;/")
 
-# fullname, email, date_of_birth, gender, username, password
+
+def show_list_doctors():
+    print("--- List Doctors ---\n")
+    result = Admin.list_doctors()
+    print("fullname".ljust(20), "date_of_birth".ljust(15), "gender".ljust(8), "specialization".ljust(20), "medical_license_number".ljust(20), "\n")
+    for item in result:
+        print(item[0].ljust(20), item[1].strftime("%Y-%m-%d").ljust(15), item[2].ljust(8), item[3].ljust(20), str(item[4]).ljust(20))
+    input("\nPress 'Enter' to continue ...")
+    clear_terminal()
 
 
 
@@ -129,7 +137,8 @@ main_menu.add_item(Item("Contact", show_contact))
 main_menu.add_item(Item("About", show_about))
 
 # ADMIN MENU
-# admin_menu = Menu("Admin", "Logout", "Bye Bye ;*")
+admin_menu = Menu("Admin", "Logout", "Bye Bye ;*")
+admin_menu.add_item(Item("List Doctors", show_list_doctors) )
 
 
 if __name__ == "__main__":
