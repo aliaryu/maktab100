@@ -1,4 +1,4 @@
-from dbmanager import DBManager
+from .dbmanager import DBManager
 import bcrypt
 
 
@@ -131,7 +131,7 @@ class Admin:
             query = """UPDATE users SET active = FALSE, delete = TRUE WHERE user_id = %s RETURNING user_id"""
             db.execute_query(query, (user_id,))
             db.commit_query()
-            return db.fetch_one()[0]
+            return db.fetch_one()
 
     @staticmethod
     def create_admin(fullname, email, date_of_birth, gender, username, password, superuser,
@@ -278,8 +278,8 @@ class Patient:
 #         print(title.ljust(30), user[index])
 
 # # Admin.delete_user
-result = Admin.delete_user(2)
-print(result)
+# result = Admin.delete_user(2)
+# print(result)
 
 # # Admin.create_admin
 # Admin.create_admin("donya monya", "donya@gmail.com", "1998-01-19", "female", "donya", "1", False, True, "watcher")
