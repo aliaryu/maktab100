@@ -167,6 +167,13 @@ class Doctor:
             db.execute_query(query, (doctor_id,))
             return db.fetch_all()
 
+    def show_doctor_income(doctor_id):
+        with DBManager() as db:
+            query = """SELECT a.doctor_id, COUNT(v.visit_id) AS count_patients, SUM(a.cost) AS
+            income FROM visits v JOIN appointments a ON v.appointment_id = a.appointment_id WHERE
+            a.doctor_id = %s GROUP BY a.doctor_id;"""
+            db.execute_query(query, (doctor_id,))
+            return db.fetch_one()
 
 
 class Patient:
@@ -285,6 +292,10 @@ class Patient:
 # for visit in result:
 #     print(str(visit[0]).ljust(15), str(visit[1]).ljust(15), visit[2].ljust(20))
 
+# # Doctor.show_doctor_income
+# result = Doctor.show_doctor_income(3)
+# print("count patients:".ljust(15), result[1])
+# print("total income:".ljust(15), result[2])
 
 # ---- PATIENT --------
 # # Patient.show_all_doctors
