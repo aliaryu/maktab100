@@ -47,7 +47,7 @@ def show_sign_up():
     role = input("Please Choice Registration AS:\n1: Patient\n2: Doctor\n\n >>> ")
     clear_terminal()
     if (role != "1") and (role != "2"):
-        print("Wrong Input...")
+        print("Invalid Input..")
         return
     print("--- Sign-Up Panel ---\n")
     fullname      = input("Full Name: ".ljust(40))
@@ -99,13 +99,40 @@ def show_list_patients():
     clear_terminal()
 
 def show_visits_info():
-    print("--- Doctors Visit Info ---\n")
+    print("--- Visit Info ---\n")
     result = Admin.visits_info()
     print("doctor_name".ljust(20), "specialization".ljust(20), "number_of_visits".ljust(20), "income".ljust(10), "\n")
     for item in result:
         print(item[0].ljust(20), item[1].ljust(20), str(item[2]).ljust(20), str(float(item[3])).ljust(10))
     input("\nPress 'Enter' to continue ...")
     clear_terminal()
+
+def show_total_income():
+    print("--- Total Income ---\n")
+    while True:
+        choice = input("Please Choice Income:\n1: Daily\n2: Weekly\n3: Monthly\n0: Back\n\n >>> ")
+        clear_terminal()
+        if choice == "1":
+            result = Admin.income_daily()
+            print(f"Daily Income: {result}")
+            input("\nPress 'Enter' to continue ...")
+            break
+        elif choice == "2":
+            result = Admin.income_weekly()
+            print(f"Weekly Income: {result}")
+            input("\nPress 'Enter' to continue ...")
+            break
+        elif choice == "3":
+            result = Admin.income_monthly()
+            print(f"Weekly Income: {result}")
+            input("\nPress 'Enter' to continue ...")
+            break
+        elif choice == "0":
+            break
+        else:
+            print("Invalid Input..\n")
+    clear_terminal()
+        
 
 
 
@@ -145,7 +172,6 @@ def show_about():
     clear_terminal()
 
 
-
 # MAIN MENU
 main_menu = Menu("Avicenna Hospital", exit_message="Your health is our goal <3 Bye.")
 main_menu.add_item(Item("Sign-In", show_sign_in))
@@ -158,6 +184,7 @@ admin_menu = Menu("Admin", "Logout", "Bye Bye ;*")
 admin_menu.add_item(Item("List Doctors", show_list_doctors))
 admin_menu.add_item(Item("List Patients", show_list_patients))
 admin_menu.add_item(Item("Visits Info", show_visits_info))
+admin_menu.add_item(Item("Total Income", show_total_income))
 
 
 if __name__ == "__main__":
