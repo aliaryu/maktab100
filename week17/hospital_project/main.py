@@ -170,7 +170,7 @@ def show_inactive_users():
                     user_id = -1
                 accept  = input("Are you sure? y/n: ".ljust(22)).lower()
                 if accept in {"y", "ye", "yes"}:
-                    output = Admin.delete_user(user_id)
+                    output = Admin.active_user(user_id)
                     if output:
                         clear_terminal()
                         print(f"User with ID '{user_id}' was actived successfully :p")
@@ -188,6 +188,39 @@ def show_inactive_users():
                 print("Invalid Input..\n")
     else:
         print("There are no inactive users -_-")
+
+def show_create_admin():
+    if user_info[8]:
+        print("--- Create Admin Panel ---\n")
+        fullname      = input("Full Name: ".ljust(40))
+        gender        = input("Gender? (male or female): ".ljust(40)).lower()
+        date_of_birth = input("Date Of Birth (e.g: 2001-01-01): ".ljust(40))
+        print()
+        email         = input("Email: ".ljust(40))
+        position      = input("Position: ".ljust(40))
+        username      = input("Username: ".ljust(40))
+        password      = input("Password: ".ljust(40))
+        password_r    = input("Password Repeat: ".ljust(40))
+        if password == password_r:
+            superuser = input("Is SuperUser? y/n: ".ljust(40)).lower()
+            if superuser in {"y", "ye", "yes"}:
+                try:
+                    output = Admin.create_admin(fullname, email, date_of_birth, gender, username, password, True, position)
+                    clear_terminal()
+                    print(f"User '{fullname}' was created in the role of 'admin' & 'superuser' O_O")
+                except Exception as error:
+                    print("Unexpected Error:", "Invalid Inputs.\n", error)
+            else:
+                try:
+                    output = Admin.create_admin(fullname, email, date_of_birth, gender, username, password, False, position)
+                    clear_terminal()
+                    print(f"User '{fullname}' was created in the role of 'admin' O_O")
+                except Exception as error:
+                    print("Unexpected Error:", "Invalid Inputs.\n", error)
+        else:
+            print("The passwords were not the same ;/")
+    else:
+        print("Sorry, Only superuser can create admins :]")
 
 
 def show_contact():
@@ -241,6 +274,7 @@ admin_menu.add_item(Item("Visits Info", show_visits_info))
 admin_menu.add_item(Item("Total Income", show_total_income))
 admin_menu.add_item(Item("Inactive Users", show_inactive_users))
 admin_menu.add_item(Item("Users/Delete", show_users_delete))
+admin_menu.add_item(Item("Create Admin", show_create_admin))
 
 
 if __name__ == "__main__":
