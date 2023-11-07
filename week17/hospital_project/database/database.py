@@ -1,6 +1,5 @@
 from dbmanager import DBManager
 import bcrypt
-import os; os.system("cls")
 
 
 def hash_password(password):
@@ -148,6 +147,18 @@ class Admin:
             db.commit_query()
 
 
+class Doctor:
+    
+    @staticmethod
+    def add_appointment(doctor_id, appointment_date, appointment_time, cost):
+        with DBManager() as db:
+            query = """INSERT INTO appointments (doctor_id, appointment_date, appointment_time,
+            cost, available) VALUES (%s, %s, %s, %s, TRUE)"""
+            db.execute_query(query, (doctor_id, appointment_date, appointment_time, cost))
+            db.commit_query()
+
+
+
 class Patient:
 
     @staticmethod
@@ -253,6 +264,11 @@ class Patient:
 
 # # Admin.create_admin
 # Admin.create_admin("donya monya", "donya@gmail.com", "1998-01-19", "female", "donya", "1", False, True, "watcher")
+
+# ---- DOCTOR --------
+# # Doctor.add_appointment
+# Doctor.add_appointment(1, "2023-11-10", "11:00:00", 150)
+
 
 # ---- PATIENT --------
 # # Patient.show_all_doctors
