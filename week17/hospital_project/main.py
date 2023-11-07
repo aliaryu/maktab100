@@ -2,6 +2,16 @@ from menu import Menu, Item
 import os
 
 
+def show_sign_in():
+    pass
+
+def show_sign_up():
+    pass
+
+
+
+
+
 def show_contact():
     print("Phone:".ljust(10), "+84 32 22 1600")
     print("Email:".ljust(10), "avicenna@support.com")
@@ -58,6 +68,9 @@ def show_about():
 
 
 main = Menu("Avicenna Hospital")
+
+main.add_item(Item("Sign-In", show_sign_in))
+main.add_item(Item("Sign-Up", show_sign_up))
 
 main.add_item(Item("Contact", show_contact))
 main.add_item(Item("About", show_about))
