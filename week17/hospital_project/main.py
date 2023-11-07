@@ -19,6 +19,7 @@ def clear_terminal():
     os.system("cls" if os.name == "nt" else "clear")
 
 def show_sign_in():
+    print("--- Sign-In Panel ---\n")
     username = input("Username: ")
     password = input("Password: ")
     global user_info
@@ -43,8 +44,33 @@ def show_sign_in():
         print("Invalid username or password >_<")
 
 def show_sign_up():
-    pass
+    role = input("Please Choice Registration AS:\n1: Patient\n2: Doctor\n\n >>> ")
+    clear_terminal()
+    if (role != "1") and (role != "2"):
+        print("Wrong Input...")
+        return
+    print("--- Sign-Up Panel ---\n")
+    fullname      = input("Full Name: ".ljust(40))
+    gender        = input("Gender? (male or female): ".ljust(40)).lower()
+    date_of_birth = input("Date Of Birth (e.g: 2001-01-01): ".ljust(40))
+    print()
+    email         = input("Email: ".ljust(40))
+    username      = input("Username: ".ljust(40))
+    password      = input("Password: ".ljust(40))
+    password_r    = input("Password Repeat: ".ljust(40))
+    if password == password_r:
+        if role == "1":
+            medical_record_number = input("Medical Record Number:".ljust(40))
+            clear_terminal()
+            try:
+                User.sign_up_patient(fullname, email, date_of_birth, gender, username, password, medical_record_number)
+                print("Your registration was successful. Awaiting admin approval :D")
+            except Exception as error:
+                print("Unexpected Error:", "Invalid Inputs.\n", error)
+    else:
+        print("The passwords were not the same ;/")
 
+# fullname, email, date_of_birth, gender, username, password
 
 
 
