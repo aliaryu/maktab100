@@ -83,7 +83,7 @@ def show_sign_up():
 def show_list_doctors():
     print("--- List Doctors ---\n")
     result = Admin.list_doctors()
-    print("fullname".ljust(20), "date_of_birth".ljust(15), "gender".ljust(8), "specialization".ljust(20), "medical_license_number".ljust(20), "\n")
+    print("doctor_name".ljust(20), "date_of_birth".ljust(15), "gender".ljust(8), "specialization".ljust(20), "medical_license_number".ljust(20), "\n")
     for item in result:
         print(item[0].ljust(20), item[1].strftime("%Y-%m-%d").ljust(15), item[2].ljust(8), item[3].ljust(20), str(item[4]).ljust(20))
     input("\nPress 'Enter' to continue ...")
@@ -92,12 +92,20 @@ def show_list_doctors():
 def show_list_patients():
     print("--- List Patients ---\n")
     result = Admin.list_patients()
-    print("fullname".ljust(20), "date_of_birth".ljust(15), "gender".ljust(8), "medical_record_number".ljust(10), "\n")
+    print("doctor_name".ljust(20), "date_of_birth".ljust(15), "gender".ljust(8), "medical_record_number".ljust(10), "\n")
     for item in result:
         print(item[0].ljust(20), item[1].strftime("%Y-%m-%d").ljust(15), item[2].ljust(8), str(item[3]).ljust(10))
     input("\nPress 'Enter' to continue ...")
     clear_terminal()
 
+def show_visits_info():
+    print("--- Doctors Visit Info ---\n")
+    result = Admin.visits_info()
+    print("doctor_name".ljust(20), "specialization".ljust(20), "number_of_visits".ljust(20), "income".ljust(10), "\n")
+    for item in result:
+        print(item[0].ljust(20), item[1].ljust(20), str(item[2]).ljust(20), str(float(item[3])).ljust(10))
+    input("\nPress 'Enter' to continue ...")
+    clear_terminal()
 
 
 
@@ -149,6 +157,7 @@ main_menu.add_item(Item("About", show_about))
 admin_menu = Menu("Admin", "Logout", "Bye Bye ;*")
 admin_menu.add_item(Item("List Doctors", show_list_doctors))
 admin_menu.add_item(Item("List Patients", show_list_patients))
+admin_menu.add_item(Item("Visits Info", show_visits_info))
 
 
 if __name__ == "__main__":
