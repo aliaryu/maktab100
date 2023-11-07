@@ -89,6 +89,15 @@ def show_list_doctors():
     input("\nPress 'Enter' to continue ...")
     clear_terminal()
 
+def show_list_patients():
+    print("--- List Patients ---\n")
+    result = Admin.list_patients()
+    print("fullname".ljust(20), "date_of_birth".ljust(15), "gender".ljust(8), "medical_record_number".ljust(10), "\n")
+    for item in result:
+        print(item[0].ljust(20), item[1].strftime("%Y-%m-%d").ljust(15), item[2].ljust(8), str(item[3]).ljust(10))
+    input("\nPress 'Enter' to continue ...")
+    clear_terminal()
+
 
 
 
@@ -138,7 +147,8 @@ main_menu.add_item(Item("About", show_about))
 
 # ADMIN MENU
 admin_menu = Menu("Admin", "Logout", "Bye Bye ;*")
-admin_menu.add_item(Item("List Doctors", show_list_doctors) )
+admin_menu.add_item(Item("List Doctors", show_list_doctors))
+admin_menu.add_item(Item("List Patients", show_list_patients))
 
 
 if __name__ == "__main__":
