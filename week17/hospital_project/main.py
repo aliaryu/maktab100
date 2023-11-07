@@ -108,31 +108,12 @@ def show_visits_info():
     clear_terminal()
 
 def show_total_income():
-    print("--- Total Income ---\n")
-    while True:
-        choice = input("Please Choice Income:\n1: Daily\n2: Weekly\n3: Monthly\n0: Back\n\n >>> ")
-        clear_terminal()
-        if choice == "1":
-            result = Admin.income_daily()
-            print(f"Daily Income: {result}")
-            input("\nPress 'Enter' to continue ...")
-            break
-        elif choice == "2":
-            result = Admin.income_weekly()
-            print(f"Weekly Income: {result}")
-            input("\nPress 'Enter' to continue ...")
-            break
-        elif choice == "3":
-            result = Admin.income_monthly()
-            print(f"Weekly Income: {result}")
-            input("\nPress 'Enter' to continue ...")
-            break
-        elif choice == "0":
-            break
-        else:
-            print("Invalid Input..\n")
+    total_income_menu = Menu("Total Income", "Back", "")
+    total_income_menu.add_item(Item("Daily Income", print, f"Daily Income: {Admin.income_daily()}"))
+    total_income_menu.add_item(Item("Weekly Income", print, f"Weekly Income: {Admin.income_weekly()}"))
+    total_income_menu.add_item(Item("Monthly Income", print, f"Monthly Income: {Admin.income_monthly()}"))
+    total_income_menu.execute()
     clear_terminal()
-        
 
 
 
