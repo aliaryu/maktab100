@@ -1,4 +1,11 @@
+import sys
+from pathlib import Path
+project_folder = Path(__file__).resolve().parent
+sys.path.append(str(project_folder))
+
+
 from menu import Menu, Item
+from database.database import User
 import os
 
 

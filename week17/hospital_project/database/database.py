@@ -1,4 +1,4 @@
-from dbmanager import DBManager
+from .dbmanager import DBManager
 import bcrypt
 
 

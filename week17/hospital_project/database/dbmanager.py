@@ -11,9 +11,9 @@ def config(file_name, section):
 
 
 # CONFIGS:
-POSTGRES_CONFIG = config("config.ini", "postgres")
-HOSPITAL_CONFIG = config("config.ini", "hospital")
-QUERY_FILE_PATH = "query.sql"
+POSTGRES_CONFIG = config("database/config.ini", "postgres")
+HOSPITAL_CONFIG = config("database/config.ini", "hospital")
+QUERY_FILE_PATH = "database/query.sql"
 
 
 class DBManager:
