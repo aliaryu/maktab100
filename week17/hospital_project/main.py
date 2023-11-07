@@ -64,7 +64,16 @@ def show_sign_up():
             clear_terminal()
             try:
                 User.sign_up_patient(fullname, email, date_of_birth, gender, username, password, medical_record_number)
-                print("Your registration was successful. Awaiting admin approval :D")
+                print(f"Your registration was successful '{fullname}'. Awaiting admin approval :D")
+            except Exception as error:
+                print("Unexpected Error:", "Invalid Inputs.\n", error)
+        elif role == "2":
+            specialization         = input("Specialization:".ljust(40))
+            medical_license_number = input("Medical License Number:".ljust(40))
+            clear_terminal()
+            try:
+                User.sign_up_doctor(fullname, email, date_of_birth, gender, username, password, specialization, medical_license_number)
+                print(f"Your registration was successful '{fullname}'. Awaiting admin approval :D")
             except Exception as error:
                 print("Unexpected Error:", "Invalid Inputs.\n", error)
     else:
