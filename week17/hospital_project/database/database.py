@@ -134,18 +134,17 @@ class Admin:
             return db.fetch_one()
 
     @staticmethod
-    def create_admin(fullname, email, date_of_birth, gender, username, password, superuser,
-                     active, position):
+    def create_admin(fullname, email, date_of_birth, gender, username, password, superuser, position):
         password = hash_password(password)
         with DBManager() as db:
             query_users = """INSERT INTO users (fullname, email, date_of_birth, gender, username,
-            password, role, superuser, active) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-            RETURNING user_id"""
-            query_admins = """INSERT INTO admins (user_id, position) VALUES (%s, %s)"""
+            password, role, superuser, active) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, TRUE) RETURNING user_id"""
+            query_admins = """INSERT INTO admins (user_id, position) VALUES (%s, %s) RETURNING user_id"""
             db.execute_query(query_users, (fullname, email, date_of_birth, gender, username,
-                                           password, "admin", superuser, active))
+                                           password, "admin", superuser))
             db.execute_query(query_admins, (db.fetch_one()[0], position))
             db.commit_query()
+            return db.fetch_one()
 
 
 class Doctor:
@@ -282,7 +281,8 @@ class Patient:
 # print(result)
 
 # # Admin.create_admin
-# Admin.create_admin("donya monya", "donya@gmail.com", "1998-01-19", "female", "donya", "1", False, True, "watcher")
+# result = Admin.create_admin("donya monya", "donya@gmail.com", "1998-01-19", "female", "donya", "1", False, "watcher")
+# print(result)
 
 # ---- DOCTOR --------
 # # Doctor.add_appointment
