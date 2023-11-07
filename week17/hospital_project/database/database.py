@@ -106,7 +106,7 @@ class Admin:
     def show_inactive_users():
         with DBManager() as db:
             query = """SELECT user_id, fullname, email, date_of_birth, gender, username, role,
-            superuser, active, delete FROM users WHERE active = FALSE LIMIT 10;"""
+            superuser, active, delete FROM users WHERE active = FALSE AND delete = FALSE LIMIT 10;"""
             db.execute_query(query)
             return db.fetch_all()
         
