@@ -116,39 +116,42 @@ def show_total_income():
     clear_terminal()
 
 def show_users_delete():
-    print("--- Users/Delete ---\n")
-    result = Admin.show_all_users()
-    titles = ["id", "fullname", "email", "date_of_birth", "gender", "username", "role", "superuser", "active", "delete"]
-    for user in result:
-        print("\n----------\n")
-        for index, title in enumerate(titles):
-            print(title.ljust(30), user[index])
-    while True:
-        choice = input("\n1: Delete User\n0: Back\n\n >>> ")
-        if choice == "1":
-            clear_terminal()
-            try:
-                user_id = int(input("Enter User ID: ".ljust(22)))
-            except:
-                user_id = -1
-            accept  = input("Are you sure? y/n: ".ljust(22)).lower()
-            if accept in {"y", "ye", "yes"}:
-                output = Admin.delete_user(user_id)
-                if output:
-                    clear_terminal()
-                    print(f"User with ID '{user_id}' was deleted successfully :(")
-                    break
+    if user_info[8]:
+        print("--- Users/Delete ---\n")
+        result = Admin.show_all_users()
+        titles = ["id", "fullname", "email", "date_of_birth", "gender", "username", "role", "superuser", "active", "delete"]
+        for user in result:
+            print("\n----------\n")
+            for index, title in enumerate(titles):
+                print(title.ljust(30), user[index])
+        while True:
+            choice = input("\n1: Delete User\n0: Back\n\n >>> ")
+            if choice == "1":
+                clear_terminal()
+                try:
+                    user_id = int(input("Enter User ID: ".ljust(22)))
+                except:
+                    user_id = -1
+                accept  = input("Are you sure? y/n: ".ljust(22)).lower()
+                if accept in {"y", "ye", "yes"}:
+                    output = Admin.delete_user(user_id)
+                    if output:
+                        clear_terminal()
+                        print(f"User with ID '{user_id}' was deleted successfully :(")
+                        break
+                    else:
+                        print("You entered a wrong ID -_-")
                 else:
-                    print("You entered a wrong ID -_-")
+                    clear_terminal()
+                    print("The delete process was canceled.")
+                    break
+            elif choice == "0":
+                break
             else:
                 clear_terminal()
-                print("The delete process was canceled.")
-                break
-        elif choice == "0":
-            break
-        else:
-            clear_terminal()
-            print("Invalid Input..\n")
+                print("Invalid Input..\n")
+    else:
+        print("Sorry, Only superuser can delete users :]")
 
 
 
