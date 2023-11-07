@@ -25,13 +25,20 @@ def show_sign_in():
     user_info = User.sign_in(username,password)
     clear_terminal()
     if user_info:
-        print(f"Welcome to {user_info[7]} panel '{user_info[1].title()}' :D\n")
-        if user_info[7] == "admin":
-            admin_menu.execute()
-        elif user_info[7] == "doctor":
-            pass
-        elif user_info[7] == "patient":
-            pass
+        if user_info[9]:
+            if not user_info[10]:
+                print(f"Welcome to {user_info[7]} panel '{user_info[1].title()}' :D\n")
+                if user_info[7] == "admin":
+                    # admin_menu.execute()
+                    pass
+                elif user_info[7] == "doctor":
+                    pass
+                elif user_info[7] == "patient":
+                    pass
+            else:
+                print("Your account has been deleted. Contact support.")
+        else:
+            print("Unfortunately, your account is not active.")
     else:
         print("Invalid username or password >_<")
 
@@ -87,7 +94,7 @@ main_menu.add_item(Item("Contact", show_contact))
 main_menu.add_item(Item("About", show_about))
 
 # ADMIN MENU
-admin_menu = Menu("Admin", "Logout", "Bye Bye ;*")
+# admin_menu = Menu("Admin", "Logout", "Bye Bye ;*")
 
 
 if __name__ == "__main__":
