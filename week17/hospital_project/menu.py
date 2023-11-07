@@ -16,10 +16,12 @@ class Item:
 
 
 class Menu:
-    def __init__(self, name):
+    def __init__(self, name, exit_menu="Exit", exit_message="bye bye ;*"):
         self.name = name
         self.items = []
         self.parent = None
+        self.exit_menu = exit_menu
+        self.exit_message = exit_message
 
     def add_item(self, item):
         self.items.append(item)
@@ -33,7 +35,7 @@ class Menu:
         if self.parent:
             print("0: Back\n")
         else:
-            print("0: Exit\n")
+            print(f"0: {self.exit_menu}\n")
 
         try:
             choice = int(input(">>> "))
@@ -46,7 +48,7 @@ class Menu:
                 self.parent.execute()
             else:
                 os.system("cls" if os.name == "nt" else "clear")
-                print(">>> bye bye ;*")
+                print(f">>> {self.exit_message}")
         elif 1 <= choice <= len(self.items):
             item = self.items[choice - 1]
             if isinstance(item, Item):
