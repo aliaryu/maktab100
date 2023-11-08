@@ -4,7 +4,8 @@ project_folder = Path(__file__).resolve().parent
 sys.path.append(str(project_folder))
 
 from menu import Menu, Item
-from database.database import User, Admin
+from database.database import User, Admin, Doctor
+from datetime import datetime, timedelta
 import os
 
 
@@ -30,9 +31,8 @@ def show_sign_in():
                 print(f"Welcome to {user_info[7]} panel '{user_info[1].title()}' :D\n")
                 if user_info[7] == "admin":
                     admin_menu.execute()
-                    pass
                 elif user_info[7] == "doctor":
-                    pass
+                    doctor_menu.execute()
                 elif user_info[7] == "patient":
                     pass
             else:
@@ -207,20 +207,79 @@ def show_create_admin():
                 try:
                     output = Admin.create_admin(fullname, email, date_of_birth, gender, username, password, True, position)
                     clear_terminal()
-                    print(f"User '{fullname}' was created in the role of 'admin' & 'superuser' O_O")
+                    if output:
+                        print(f"User '{fullname}' was created in the role of 'admin' & 'superuser' O_O")
+                    else:
+                        print(f"Unexpected Error", "Invalid Inputs.\n")
                 except Exception as error:
                     print("Unexpected Error:", "Invalid Inputs.\n", error)
             else:
                 try:
                     output = Admin.create_admin(fullname, email, date_of_birth, gender, username, password, False, position)
                     clear_terminal()
-                    print(f"User '{fullname}' was created in the role of 'admin' O_O")
+                    if output:
+                        print(f"User '{fullname}' was created in the role of 'admin' O_O")
+                    else:
+                        print(f"Unexpected Error", "Invalid Inputs.\n")
                 except Exception as error:
                     print("Unexpected Error:", "Invalid Inputs.\n", error)
         else:
             print("The passwords were not the same ;/")
     else:
         print("Sorry, Only superuser can create admins :]")
+
+
+
+def show_add_appointment():
+    print("--- Add Appointment Panel ---\n")
+    current_date_time = datetime.now()
+    print("Current Date & Time:".ljust(39), datetime.strftime(current_date_time, "%Y-%m-%d %H:%M:%S"))
+    try:
+        appointment_date = input("Appointment Date (e.g: 2001-01-01): ".ljust(40))
+        if current_date_time.date() > datetime.strptime(appointment_date, "%Y-%m-%d").date():
+            clear_terminal()
+            print("Invalid Date.. You cannot choose a date in the past.")
+            return
+    except:
+        clear_terminal()
+        print("Invalid Date Format..")
+        return
+    try:
+        appointment_time = input("Appointment Time (e.g: 08:00:00): ".ljust(40))
+        if current_date_time.date() == datetime.strptime(appointment_date, "%Y-%m-%d").date():
+            if current_date_time.time() > datetime.strptime(appointment_time, "%H:%M:%S").time():
+                clear_terminal()
+                print("Invalid Time.. You cannot choose a time in the past.")
+                return
+    except:
+        clear_terminal()
+        print("Invalid Time Format..")
+        return
+    try:
+        cost = float(input("Cost: ".ljust(40)))
+        if cost <= 0:
+            clear_terminal()
+            print("Invalid Cost.. You cannot enter a negative or zero cost.")
+            return
+    except:
+        clear_terminal()
+        print("Invalid Cost Format..")
+        return
+    clear_terminal()
+    print(f"Appointment time on '{appointment_date} {appointment_time}' date &\ntime with a cost of '{cost}'. do you confirm?")
+    choice = input("\ny/n: ").lower()
+    if choice in {"y", "ye", "yes"}:
+        output = Doctor.add_appointment(user_info[0], appointment_date, appointment_time, cost)
+        clear_terminal()
+        if output:
+            print("The appointment was successfully registered in the system ^^")
+        else:
+            print(f"Unexpected Error", "Invalid Inputs.\n")
+    else:
+        print("Appointment registration was canceled.")
+
+
+
 
 
 def show_contact():
@@ -275,6 +334,10 @@ admin_menu.add_item(Item("Total Income", show_total_income))
 admin_menu.add_item(Item("Inactive Users", show_inactive_users))
 admin_menu.add_item(Item("Users/Delete", show_users_delete))
 admin_menu.add_item(Item("Create Admin", show_create_admin))
+
+# DOCTOR MENU
+doctor_menu = Menu("Doctor", "Logout", "Bye Bye Dr.")
+doctor_menu.add_item(Item("Add Appointment", show_add_appointment))
 
 
 if __name__ == "__main__":
