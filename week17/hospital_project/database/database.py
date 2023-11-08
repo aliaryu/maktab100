@@ -175,6 +175,13 @@ class Doctor:
             a.doctor_id = %s GROUP BY a.doctor_id;"""
             db.execute_query(query, (doctor_id,))
             return db.fetch_one()
+        
+    def get_doctor_id_by_user_id(user_id):
+        with DBManager() as db:
+            query = """SELECT doctor_id FROM users u JOIN doctors d ON u.user_id = d.user_id WHERE
+            u.user_id = %s;"""
+            db.execute_query(query, (user_id,))
+            return db.fetch_one()
 
 
 class Patient:
