@@ -266,7 +266,8 @@ def show_add_appointment():
     print(f"Appointment time on '{appointment_date} {appointment_time}' date &\ntime with a cost of '{cost}'. do you confirm?")
     choice = input("\ny/n: ").lower()
     if choice in {"y", "ye", "yes"}:
-        output = Doctor.add_appointment(user_info[0], appointment_date, appointment_time, cost)
+        doctor_id = Doctor.get_doctor_id_by_user_id(user_info[0])
+        output = Doctor.add_appointment(doctor_id, appointment_date, appointment_time, cost)
         clear_terminal()
         if output:
             print("The appointment was successfully registered in the system ^^")

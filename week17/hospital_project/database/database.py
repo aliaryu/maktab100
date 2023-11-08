@@ -173,7 +173,11 @@ class Doctor:
             cost, available) VALUES (%s, %s, %s, %s, TRUE) RETURNING appointment_id"""
             db.execute_query(query, (doctor_id, appointment_date, appointment_time, cost))
             db.commit_query()
-            return db.fetch_one()
+            result = db.fetch_one()
+            if result:
+                logger_doctor.info(f"doctor id '{doctor_id[0]}' created a appointment.")
+                return result
+
     
     @staticmethod
     def show_doctor_visits(doctor_id):
