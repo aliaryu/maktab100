@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
-project_folder = Path(__file__).resolve().parent
-sys.path.append(str(project_folder))
+project_path = Path(__file__).resolve().parent
+sys.path.append(str(project_path))
 
 from menu import Menu, Item
 from database.database import User, Admin, Doctor, Patient

@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
-project_folder = Path(__file__).resolve().parent.parent
-sys.path.append(str(project_folder))
+project_path = Path(__file__).resolve().parent.parent
+sys.path.append(str(project_path))
 
 import unittest
 from unittest.mock import patch
