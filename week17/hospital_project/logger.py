@@ -12,10 +12,17 @@ file_handler_user.setLevel(logging.INFO)
 logger_user.addHandler(file_handler_user)
 logger_user.setLevel(logging.INFO)
 
+# LOGGER ADMIN
+logger_admin = logging.getLogger("database.Admin")
+file_handler_admin = logging.FileHandler(OUTPUT_FOLDER + "admin.log")
+file_handler_admin.setFormatter(HANDLER_FORMAT)
+file_handler_admin.setLevel(logging.INFO)
+logger_admin.addHandler(file_handler_admin)
+logger_admin.setLevel(logging.INFO)
 
 
 
 
-
-
+# logger_user.info("info")
+# logger_admin.info("admin")
 
