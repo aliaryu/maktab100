@@ -22,13 +22,16 @@ class TestDBManager(unittest.TestCase):
         self.assertEqual(result, expected)
     
     def test_fetch_all(self):
-        self.db.execute_query("SELECT user_id FROM users LIMIT 3;")
+        self.db.execute_query("SELECT user_id FROM users ORDER BY user_id LIMIT 3;")
         result = self.db.fetch_all()
         expected = [(1,), (2,), (3,)]
         self.assertEqual(result, expected)
 
-
-
+    def test_commit_query(self):
+        self.db.execute_query("UPDATE users SET delete = TRUE WHERE user_id = 1 RETURNING user_id;")
+        result = self.db.fetch_one()
+        expected = (1,)
+        self.assertEqual(result, expected)
 
 if __name__ == '__main__':
     unittest.main()
