@@ -158,7 +158,10 @@ class Admin:
                                            password, "admin", superuser))
             db.execute_query(query_admins, (db.fetch_one()[0], position))
             db.commit_query()
-            return db.fetch_one()
+            result = db.fetch_one()
+            if result:
+                logger_admin.info(f"admin '{username}' created.")
+                return result
 
 
 class Doctor:
