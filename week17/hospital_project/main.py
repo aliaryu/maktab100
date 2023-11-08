@@ -10,8 +10,6 @@ import os
 
 
 # USER COOCKIES
-# (1, 'ali aryu', 'aliaryu@yahoo.com', datetime.date(1997, 4, 22), 'male', 'aliaryu', <memory at 0x000001519434E5C0>, 'admin', True, True, False)
-#  0     1               2                       3 hbd                4        5                    6 pw                 7      8s    9a    10d
 user_info = None
 
 
