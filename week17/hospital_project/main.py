@@ -191,7 +191,7 @@ def show_inactive_users():
 
 def show_create_admin():
     if user_info[8]:
-        print("--- Create Admin Panel ---\n")
+        print("--- Create Admin ---\n")
         fullname      = input("Full Name: ".ljust(40))
         gender        = input("Gender? (male or female): ".ljust(40)).lower()
         date_of_birth = input("Date Of Birth (e.g: 2001-01-01): ".ljust(40))
@@ -231,7 +231,7 @@ def show_create_admin():
 
 
 def show_add_appointment():
-    print("--- Add Appointment Panel ---\n")
+    print("--- Add Appointment ---\n")
     current_date_time = datetime.now()
     print("Current Date & Time:".ljust(39), datetime.strftime(current_date_time, "%Y-%m-%d %H:%M:%S"))
     try:
@@ -278,7 +278,20 @@ def show_add_appointment():
     else:
         print("Appointment registration was canceled.")
 
-
+def show_doctor_visits():
+    print("--- My Visits ---\n")
+    try:
+        result = Doctor.show_doctor_visits(Doctor.get_doctor_id_by_user_id(user_info[0]))
+        if result:
+            print("date".ljust(15), "time".ljust(15), "patient".ljust(20), "\n")
+            for visit in result:
+                print(str(visit[0]).ljust(15), str(visit[1]).ljust(15), visit[2].ljust(20))
+        else:
+            print("No visits have been registered :(")
+        input("\nPress 'Enter' to continue ...")
+        clear_terminal()
+    except Exception as error:
+        print("Unexpected Error:", "Invalid Inputs.\n", error)
 
 
 
@@ -338,6 +351,7 @@ admin_menu.add_item(Item("Create Admin", show_create_admin))
 # DOCTOR MENU
 doctor_menu = Menu("Doctor", "Logout", "Bye Bye Dr.")
 doctor_menu.add_item(Item("Add Appointment", show_add_appointment))
+doctor_menu.add_item(Item("Show My Visits", show_doctor_visits))
 
 
 if __name__ == "__main__":
