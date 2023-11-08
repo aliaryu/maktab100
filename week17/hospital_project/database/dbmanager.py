@@ -36,8 +36,11 @@ class DBManager:
             temp_cursor = temp_connection.cursor()
             temp_cursor.execute(f"CREATE DATABASE {HOSPITAL_CONFIG['dbname']}")
         finally:
-            temp_cursor.close()
-            temp_connection.close()
+            try:
+                temp_cursor.close()
+                temp_connection.close()
+            except Exception as error:
+                raise Exception(f"Unexpected Error..\n{str(error)}\nMaybe username/password are wrong in 'config.ini'?")
         self.connection = psycopg2.connect(**HOSPITAL_CONFIG)
         self.cursor = self.connection.cursor()
         with open(QUERY_FILE_PATH, "r") as file:
