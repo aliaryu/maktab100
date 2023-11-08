@@ -348,7 +348,15 @@ def show_reserve_visit():
         clear_terminal()
         print("Invalid Input.. The reservation was canceled.")
 
-
+def show_visit_history():
+    print("--- List Doctors ---\n")
+    result = Patient.visit_history(user_info[0])
+    print("visit_id".ljust(10), "date".ljust(15), "time".ljust(15), "cost".ljust(10), "doctor".ljust(20), "\n")
+    for visit in result:
+        print(str(visit[0]).ljust(10), str(visit[1]).ljust(15), str(visit[2]).ljust(15), str(visit[3]).ljust(10),
+              visit[4].ljust(20))
+    input("\nPress 'Enter' to continue ...")
+    clear_terminal()
 
 
 def show_contact():
@@ -413,6 +421,7 @@ doctor_menu.add_item(Item("Show My Income", show_doctor_income))
 # PATIENT MENU
 patient_menu = Menu("Patient", "Logout", "God Bles You.. Bye.")
 patient_menu.add_item(Item("Reserve Visit", show_reserve_visit))
+patient_menu.add_item(Item("Visit History", show_visit_history))
 
 if __name__ == "__main__":
     main_menu.execute()
