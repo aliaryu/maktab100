@@ -1,6 +1,6 @@
 from .dbmanager import DBManager
 import bcrypt
-from logger import logger_user
+from logger import logger_user, logger_admin, logger_doctor, logger_patient
 
 def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), b'$2b$12$0KdMmFngvGhqBI0CMM/Lp.')
@@ -120,9 +120,13 @@ class Admin:
     @staticmethod
     def active_user(user_id):
         with DBManager() as db:
-            query = """UPDATE users SET active = TRUE, delete = FALSE WHERE user_id = %s"""
+            query = """UPDATE users SET active = TRUE, delete = FALSE WHERE user_id = %s RETURNING user_id"""
             db.execute_query(query, (user_id,))
             db.commit_query()
+            result = db.fetch_one()
+            if result:
+                logger_admin.info(f"user id '{user_id}' actived.")
+                return result
 
     @staticmethod
     def show_all_users():
