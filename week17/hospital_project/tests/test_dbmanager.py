@@ -15,8 +15,12 @@ class TestDBManager(unittest.TestCase):
     def tearDown(self) -> None:
         self.db.close()
 
-    def test_insert(self):
-        pass
+    def test_fetch_one(self):
+        self.db.execute_query("SELECT user_id FROM users WHERE user_id = 1;")
+        result = self.db.fetch_one()
+        expected = (1,)
+        self.assertEqual(result, expected)
+
 
 
 
