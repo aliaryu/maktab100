@@ -34,6 +34,8 @@ class User:
                                             password, "doctor"))
             db.execute_query(query_doctors, (db.fetch_one()[0], specialization, medical_license_number))
             db.commit_query()
+            if db.fetch_one():
+                logger_user.info(f"doctor '{fullname}' has signed up.")
 
     @staticmethod
     def sign_up_patient(fullname, email, date_of_birth, gender, username, password,
@@ -43,11 +45,13 @@ class User:
             query_users = """INSERT INTO users (fullname, email, date_of_birth, gender,
             username, password, role) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING user_id"""
             query_patients = """INSERT INTO patients (user_id, medical_record_number)
-            VALUES (%s, %s)"""
+            VALUES (%s, %s) RETURNING patient_id"""
             db.execute_query(query_users, (fullname, email, date_of_birth, gender, username,
                                             password, "patient"))
             db.execute_query(query_patients, (db.fetch_one()[0], medical_record_number))
             db.commit_query()
+            if db.fetch_one():
+                logger_user.info(f"patient '{fullname}' has signed up.")
 
 
 class Admin:
