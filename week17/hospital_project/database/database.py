@@ -142,7 +142,10 @@ class Admin:
             query = """UPDATE users SET active = FALSE, delete = TRUE WHERE user_id = %s RETURNING user_id"""
             db.execute_query(query, (user_id,))
             db.commit_query()
-            return db.fetch_one()
+            result = db.fetch_one()
+            if result:
+                logger_admin.warning(f"user id '{user_id}' deleted.")
+                return result
 
     @staticmethod
     def create_admin(fullname, email, date_of_birth, gender, username, password, superuser, position):
