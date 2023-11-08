@@ -1,6 +1,6 @@
 from .dbmanager import DBManager
 import bcrypt
-
+from logger import logger_user
 
 def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), b'$2b$12$0KdMmFngvGhqBI0CMM/Lp.')
@@ -16,7 +16,10 @@ class User:
             result = db.fetch_one()
             if result:
                 if bcrypt.checkpw(password.encode("utf-8"), bytes(result[6])):
+                    logger_user.info(f"user '{username}' has signed in.")
                     return result
+            else:
+                logger_user.warning(f"user '{username}' tried to signed in, but the password was wrong.")
 
     @staticmethod
     def sign_up_doctor(fullname, email, date_of_birth, gender, username, password,
@@ -26,7 +29,7 @@ class User:
             query_users = """INSERT INTO users (fullname, email, date_of_birth, gender,
             username, password, role) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING user_id"""
             query_doctors = """INSERT INTO doctors (user_id, specialization, medical_license_number)
-            VALUES (%s, %s, %s)"""
+            VALUES (%s, %s, %s) RETURNING doctor_id"""
             db.execute_query(query_users, (fullname, email, date_of_birth, gender, username,
                                             password, "doctor"))
             db.execute_query(query_doctors, (db.fetch_one()[0], specialization, medical_license_number))
