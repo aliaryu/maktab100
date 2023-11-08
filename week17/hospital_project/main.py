@@ -229,7 +229,6 @@ def show_create_admin():
         print("Sorry, Only superuser can create admins :]")
 
 
-
 def show_add_appointment():
     print("--- Add Appointment ---\n")
     current_date_time = datetime.now()
@@ -293,6 +292,18 @@ def show_doctor_visits():
     except Exception as error:
         print("Unexpected Error:", "Invalid Inputs.\n", error)
 
+def show_doctor_income():
+    print("--- My Income ---\n")
+    result = Doctor.show_doctor_income(3)
+    if result:
+        print("count patients:".ljust(20), result[1])
+        print("total income:".ljust(20), result[2])
+    else:
+        print("You have not received any income yet :(")
+    input("\nPress 'Enter' to continue ...")
+    clear_terminal()
+
+
 
 
 def show_contact():
@@ -352,7 +363,7 @@ admin_menu.add_item(Item("Create Admin", show_create_admin))
 doctor_menu = Menu("Doctor", "Logout", "Bye Bye Dr.")
 doctor_menu.add_item(Item("Add Appointment", show_add_appointment))
 doctor_menu.add_item(Item("Show My Visits", show_doctor_visits))
-
+doctor_menu.add_item(Item("Show My Income", show_doctor_income))
 
 if __name__ == "__main__":
     main_menu.execute()
