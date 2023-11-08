@@ -306,6 +306,7 @@ def show_doctor_income():
 
 
 
+
 def show_contact():
     print("Phone:".ljust(10), "+84 32 22 1600")
     print("Email:".ljust(10), "avicenna@support.com")
@@ -364,6 +365,10 @@ doctor_menu = Menu("Doctor", "Logout", "Bye Bye Dr.")
 doctor_menu.add_item(Item("Add Appointment", show_add_appointment))
 doctor_menu.add_item(Item("Show My Visits", show_doctor_visits))
 doctor_menu.add_item(Item("Show My Income", show_doctor_income))
+
+# PATIENT MENU
+patient_menu = Menu("Patient", "Logout", "God Bles You.. Bye.")
+patient_menu.add_item(Item("Reserve Visit", show_reserve_visit))
 
 if __name__ == "__main__":
     main_menu.execute()
