@@ -295,11 +295,11 @@ INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (37, 4, 
 UPDATE appointments SET available = false WHERE appointment_id = 37;
 INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (38, 5, true, CURRENT_DATE);
 UPDATE appointments SET available = false WHERE appointment_id = 38;
-INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (40, 6, true, CURRENT_DATE);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (40, 6, true, CURRENT_DATE - INTERVAL '3 day');
 UPDATE appointments SET available = false WHERE appointment_id = 40;
-INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (54, 7, true, CURRENT_DATE);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (54, 7, true, CURRENT_DATE - INTERVAL '3 day');
 UPDATE appointments SET available = false WHERE appointment_id = 54;
-INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (55, 8, true, CURRENT_DATE);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (55, 8, true, CURRENT_DATE - INTERVAL '10 day');
 UPDATE appointments SET available = false WHERE appointment_id = 55;
-INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (56, 9, true, CURRENT_DATE);
+INSERT INTO visits (appointment_id, patient_id, paid, paid_date) VALUES (56, 9, true, CURRENT_DATE - INTERVAL '10 day');
 UPDATE appointments SET available = false WHERE appointment_id = 56;

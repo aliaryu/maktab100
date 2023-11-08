@@ -82,4 +82,3 @@ class DBManager:
         if self.connection:
             return self.cursor.fetchall()
         raise psycopg2.Error("There is no connection or a query has not been performed")
-
