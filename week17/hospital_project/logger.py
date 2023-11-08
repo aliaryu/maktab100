@@ -20,9 +20,17 @@ file_handler_admin.setLevel(logging.INFO)
 logger_admin.addHandler(file_handler_admin)
 logger_admin.setLevel(logging.INFO)
 
+# LOGGER DOCTOR
+logger_doctor = logging.getLogger("database.Doctor")
+file_handler_doctor = logging.FileHandler(OUTPUT_FOLDER + "doctor.log")
+file_handler_doctor.setFormatter(HANDLER_FORMAT)
+file_handler_doctor.setLevel(logging.INFO)
+logger_doctor.addHandler(file_handler_doctor)
+logger_doctor.setLevel(logging.INFO)
 
 
 
-# logger_user.info("info")
+# logger_user.info("user")
 # logger_admin.info("admin")
+# logger_doctor.info("doctor")
 
