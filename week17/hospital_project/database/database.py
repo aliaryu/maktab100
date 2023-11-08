@@ -208,10 +208,12 @@ class Patient:
         with DBManager() as db:
             query_visits = """INSERT INTO visits (appointment_id, patient_id, paid, paid_date)
             VALUES (%s, %s, TRUE, CURRENT_DATE)"""
-            query_appointments = """UPDATE appointments SET available = FALSE WHERE appointment_id = %s"""
+            query_appointments = """UPDATE appointments SET available = FALSE WHERE appointment_id = %s
+            RETURNING appointment_id"""
             db.execute_query(query_visits, (appointment_id, patient_id))
             db.execute_query(query_appointments, (appointment_id,))
             db.commit_query()
+            return db.fetch_one()
 
     @staticmethod
     def visit_history(patient_id):
