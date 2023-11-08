@@ -166,20 +166,31 @@ def show_inactive_users():
                     user_id = int(input("Enter User ID: ".ljust(22)))
                 except:
                     user_id = -1
-                accept  = input("Are you sure? y/n: ".ljust(22)).lower()
-                if accept in {"y", "ye", "yes"}:
-                    output = Admin.active_user(user_id)
-                    if output:
-                        clear_terminal()
-                        print(f"User with ID '{user_id}' was actived successfully :p")
-                        break
+                if user_id != -1:
+                    for user in result:
+                        if user[0] == user_id:
+                            break
                     else:
-                        print("You entered a wrong ID -_-")
+                        clear_terminal()
+                        print(f"ID '{user_id}' was not in the list of inactive users -_-")
+                        return
+                    accept  = input("Are you sure? y/n: ".ljust(22)).lower()
+                    if accept in {"y", "ye", "yes"}:
+                        output = Admin.active_user(user_id)
+                        if output:
+                            clear_terminal()
+                            print(f"User with ID '{user_id}' was actived successfully :p")
+                            break
+                        else:
+                            print("You entered a wrong ID -_-")
+                    else:
+                        clear_terminal()
+                        print("The active process was canceled.")
+                        break
                 else:
-                    clear_terminal()
-                    print("The active process was canceled.")
-                    break
+                    print("You entered a wrong ID -_-")
             elif choice == "0":
+                clear_terminal()
                 break
             else:
                 clear_terminal()
