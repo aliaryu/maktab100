@@ -143,6 +143,7 @@ def show_users_delete():
                     print("The delete process was canceled.")
                     break
             elif choice == "0":
+                clear_terminal()
                 break
             else:
                 clear_terminal()
