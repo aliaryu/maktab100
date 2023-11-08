@@ -4,8 +4,8 @@ project_folder = Path(__file__).resolve().parent
 sys.path.append(str(project_folder))
 
 from menu import Menu, Item
-from database.database import User, Admin, Doctor
-from datetime import datetime, timedelta
+from database.database import User, Admin, Doctor, Patient
+from datetime import datetime
 import os
 
 
@@ -34,7 +34,7 @@ def show_sign_in():
                 elif user_info[7] == "doctor":
                     doctor_menu.execute()
                 elif user_info[7] == "patient":
-                    pass
+                    patient_menu.execute()
             else:
                 print("Your account has been deleted. Contact support.")
         else:
@@ -303,6 +303,50 @@ def show_doctor_income():
     input("\nPress 'Enter' to continue ...")
     clear_terminal()
 
+
+def show_reserve_visit():
+    print("--- Reserve Visit ---\n")
+    result_doctors = Patient.show_all_doctors()
+    print("number".ljust(8), "fullname".ljust(20), "specialization".ljust(20), "\n")
+    for index, doctor in enumerate(result_doctors):
+        print(str(index + 1).ljust(8), doctor[1].ljust(20), doctor[2].ljust(20))
+    try:
+        print("\n0: Back To Menu")
+        choice_doctor = int(input("\n>>> "))
+        if choice_doctor == 0:
+            raise KeyboardInterrupt()
+        elif choice_doctor < 0:
+            raise
+        else:
+            doctor_id = result_doctors[choice_doctor -1][0]
+        result_appointments = Patient.show_doctor_appointments(doctor_id)
+        if result_appointments:
+            print("number".ljust(8), "date".ljust(15), "time".ljust(15), "cost".ljust(10), "\n")
+            for index, appointment in enumerate(result_appointments):
+                print(str(index + 1).ljust(8), str(appointment[1]).ljust(15), str(appointment[2]).ljust(15), 
+                    str(appointment[3]).ljust(10))
+            print("\n0: Back To Menu")
+            choice_appointment = int(input("\n>>> "))
+            if choice_appointment == 0:
+                raise KeyboardInterrupt()
+            elif choice_appointment < 0:
+                raise
+            else:
+                appointment_id = result_appointments[choice_appointment - 1][0]
+            result_reserve = Patient.reserve_visit(appointment_id, user_info[0])
+            clear_terminal()
+            if result_reserve:
+                print("Visit has been reserved for you. To review,\nyou can see it in the visit history section.")
+            else:
+                print("Unexpected Error, The reservation canceled.")
+        else:
+            clear_terminal()
+            print(f"'{result_doctors[choice_doctor -1][1]}' doctor has no free time.")
+    except KeyboardInterrupt:
+        clear_terminal()
+    except Exception as error:
+        clear_terminal()
+        print("Invalid Input.. The reservation was canceled.")
 
 
 
