@@ -234,7 +234,10 @@ class Patient:
             db.execute_query(query_visits, (appointment_id, patient_id))
             db.execute_query(query_appointments, (appointment_id,))
             db.commit_query()
-            return db.fetch_one()
+            result = db.fetch_one()
+            if result:
+                logger_patient.info(f"patient id '{patient_id}' reserved appointment id '{appointment_id}'.")
+                return result
 
     @staticmethod
     def visit_history(patient_id):
