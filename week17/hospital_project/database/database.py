@@ -2,8 +2,10 @@ from .dbmanager import DBManager
 import bcrypt
 from logger import logger_user, logger_admin, logger_doctor, logger_patient
 
+
 def hash_password(password):
-    return bcrypt.hashpw(password.encode('utf-8'), b'$2b$12$0KdMmFngvGhqBI0CMM/Lp.')
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(password.encode('utf-8'), salt)
 
 
 class User:
