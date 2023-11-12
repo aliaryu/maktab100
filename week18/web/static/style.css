@@ -1,10 +1,15 @@
+@font-face {
+    font-family: "JetBrains";
+    src: url("../static/fonts/JetBrainsMono[wght].ttf");
+}
+
 :root {
-    /* --color1: hotpink; */
+    --color1: hotpink;
     /* color: var(--color1) */
 }
 
 * {
-    font-family: JetBrains Mono;
+    font-family: JetBrains;
 }
 
 .fw-custom {
