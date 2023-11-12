@@ -7,6 +7,10 @@
     font-family: JetBrains Mono;
 }
 
+.fw-custom {
+    font-weight: 700;
+}
+
 .bi-code-slash {
     -webkit-text-stroke: 1.5px;
 }
