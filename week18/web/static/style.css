@@ -3,11 +3,6 @@
     src: url("../static/fonts/JetBrainsMono[wght].ttf");
 }
 
-:root {
-    --color1: hotpink;
-    /* color: var(--color1) */
-}
-
 * {
     font-family: JetBrains;
 }
