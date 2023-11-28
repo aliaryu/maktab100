@@ -60,7 +60,7 @@
 
                 
                     <a class="btn btn-outline-secondary fw-custom border-2 my-1 mx-lg-1 fw-custom" href="#" role="button"><i class="bi bi-person-circle"></i></a>
-                    <a class="btn btn-outline-secondary fw-custom border-2 my-1 fw-custom" href="{% url "logout" %}?next=/" role="button">Logout</a>
+                    <a class="btn btn-outline-secondary fw-custom border-2 my-1 fw-custom" href="{% url "logout" %}" role="button">Logout</a>
 
                 {% else %}
 
@@ -88,7 +88,7 @@
 
     {% comment %} CONTENT {% endcomment %}
     <div class="container my-5">
-        {% block content %}Sorry, Unexpected Situation{% endblock content %}
+        {% block content %}Sorry, Unexpected Situation O_O{% endblock content %}
     </div>
 
     {% comment %} FOOTER {% endcomment %}
