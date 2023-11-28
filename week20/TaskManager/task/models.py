@@ -52,7 +52,12 @@ class Task(models.Model):
         verbose_name="Category",
         related_name="tasks"
     )
-    tags = models.ManyToManyField(Tag, verbose_name="Tags", related_name="tasks")
+    tags = models.ManyToManyField(
+        Tag,
+        blank=True,
+        verbose_name="Tags",
+        related_name="tasks"
+    )
 
     class Meta:
         ordering = ["-due_date"]
