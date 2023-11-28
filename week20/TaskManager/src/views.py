@@ -3,5 +3,5 @@ from django.shortcuts import render
 
 def index_view(request):
 
-    context = 1
-    return render(request, "base.html", context)
+    tasks= 1
+    return render(request, "task/home.html", {'tasks': tasks})
