@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 
@@ -46,6 +47,7 @@ class Task(models.Model):
         choices=STATUS_CHOICES,
         default="I"
     )
+    user     = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     category = models.ForeignKey(
         Category,
         models.CASCADE,
