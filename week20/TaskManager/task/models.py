@@ -76,6 +76,12 @@ class Task(models.Model):
     def get_absolute_url(self):
         return reverse("task:task_detail", kwargs={"pk": self.pk})
     
+    def delete_task_url(self):
+        return reverse("task:task_delete", kwargs={"pk": self.pk})
+    
+    def complete_task_url(self):
+        return reverse("task:task_complete", kwargs={"pk": self.pk})
+    
     def __str__(self):
         return self.title
 

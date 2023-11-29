@@ -31,7 +31,7 @@
                     </div> {% endcomment %}
           
                     <div class="mb-3">
-                      <span class="h5 fw-custom"><a href={{ task.category.get_absolute_url }}>{{ task.category.category }}</a></span>
+                      <span class="h5 fw-custom"><a class="text-secondary" href={{ task.category.get_absolute_url }}>{{ task.category.category }}</a></span>
                     </div>
                     
                     <!-- DESCRIPTION -->
@@ -45,7 +45,12 @@
                       <dd class="col-9 fw-custom text-muted">{{ task.user.username }}</dd>
 
                       <dt class="col-3 fw-custom">Status:</dt>
-                      <dd class="col-9 fw-custom text-muted">{{ task.get_status_display }}</dd>
+                      
+                      {% if task.due_date|date:"Y-m-d" < timezone.now|date:"Y-m-d" and task.status == "I" %}
+                        <dd class="col-9 fw-custom text-muted">Failed ...</dd>
+                      {% else  %}
+                        <dd class="col-9 fw-custom text-muted">{{ task.get_status_display }}</dd>
+                      {% endif %}
           
                       <dt class="col-3 fw-custom">Due Date:</dt>
                       <dd class="col-9 fw-custom text-muted">{{ task.due_date|date:"Y-m-d" }}</dd>
@@ -53,7 +58,7 @@
                       <dt class="col-3 fw-custom">Tags:</dt>
                       <dd class="col-9 fw-custom text-muted">
                         {% for tag in task.tags.all %}
-                            <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>,
+                            <a class="text-secondary" href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>,
                         {% endfor %}
                       </dd>
                     </div>
@@ -61,10 +66,13 @@
                     <hr />
                     
                     <!-- BUTTONS -->
-                    <a href="#" class="btn btn-secondary my-1"> <i class="bi bi-bag"></i> Buy now </a>
-                    <a href="#" class="btn btn-secondary my-1"> <i class="bi bi-cart3"></i> Add to cart </a>
-                    <a href="#" class="btn btn-secondary my-1"> <i class="bi bi-save2"></i> Save </a>
-
+                    <a href="{{ task.delete_task_url }}" class="btn btn-secondary my-1"> <i class="bi bi-trash"></i> Delete </a>
+                    
+                    {% if task.status == "I" %}
+                        <a href="{{ task.complete_task_url }}" class="btn btn-secondary my-1"> <i class="bi bi-check-circle"></i> Complete </a>
+                    {% else %}
+                    <a href="#" class="btn btn-secondary my-1 disabled"> <i class="bi bi-check-circle" disabled></i> Complete </a>
+                    {% endif %}
 
                   </div>
                 </main>
