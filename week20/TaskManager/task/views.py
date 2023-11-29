@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Task, Category, Tag
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 
 @login_required
@@ -79,3 +80,20 @@ def tag_detail(request, pk):
         tags = tag.tasks.all()
     except:
         tag = None
+    if tag:
+        context = {
+            "tag": tag,
+            "tags": tags
+        }
+        return render(request, "task/tag_detail.html", context=context)
+    else:
+        context = {
+            "error": ["You have no permision for this page.",
+                      "Or maybe you ****** *****r kiding us?"]
+        }
+        return render(request, "404.html", context=context, status=404)
+
+@login_required
+def mine(request):
+    mine = Task.objects.filter(user_id=request.user.id)
+    return render(request, "task/mine.html", context={"mine":mine})

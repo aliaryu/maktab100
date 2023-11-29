@@ -5,7 +5,6 @@ from django.utils import timezone
 
 
 def index_view(request):
-
     login_form = LoginForm()
     tasks      = Task.objects.filter(due_date__gte = timezone.now()).order_by("-id")
 
@@ -13,5 +12,4 @@ def index_view(request):
         "login_form": login_form,
         "tasks": tasks
     }
-
     return render(request, "index.html", context=context)
