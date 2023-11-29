@@ -14,7 +14,7 @@
                       <h5 class="fw-bolder">{{ task.title }}</h5>
 
                       <span class="text-muted fw-custom">Owner: {{ task.user.username }}</span><br>
-                      <span class="text-muted fw-custom">Description: {{ task.description|truncatewords:5 }}</span>
+                      <span class="text-muted fw-custom">Description: {{ task.description|truncatechars:50 }}</span>
                   </div>
               </div>
               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">

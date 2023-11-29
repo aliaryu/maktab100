@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="alert alert-danger">
+    <strong>Error(s):</strong>
+    <ul>
+      {% for err in error %}
+        <li>{{ err }}</li>
+      {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

@@ -17,6 +17,7 @@ class LoginForm(AuthenticationForm):
             'name': 'username',
             'placeholder': "Enter Username",
             'required': True,
+            "autocomplete": "off",
         })
 
         self.fields['password'].widget.attrs.update({
@@ -26,4 +27,5 @@ class LoginForm(AuthenticationForm):
             'name': 'password',
             'placeholder': "Enter Password",
             'required': True,
+            "autocomplete": "off",
         })
