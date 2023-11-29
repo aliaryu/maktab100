@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # INTERNAL APPS
     "task.apps.TaskConfig",
+    "account.apps.AccountConfig",
 
 ]
 
