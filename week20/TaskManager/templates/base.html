@@ -40,21 +40,14 @@
                   
                   {% endif %}
 
-                  <li class="nav-item dropdown fw-custom">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Categories
-                    </a>
-                    <ul class="dropdown-menu">
-
-                      <li><a class="dropdown-item fw-custom" href="#">Front-End</a></li>
-
-                    </ul>
+                  <li class="nav-item fw-custom">
+                    <a class="nav-link" href="{% url "task:categories" %}">Categories</a>
                   </li>
                 </ul>
                 
-                <form class="input-group ms-lg-5" method="get" action="">
+                <form class="input-group ms-lg-5" method="get" action="{% url "task:search" %}">
                     {% comment %} {% csrf_token %} {% endcomment %}
-                    <input type="text" class="form-control border-secondary border-2 fw-custom rounded-start" placeholder="Search ..." aria-label="Search ..." aria-describedby="button-addon2">
+                    <input type="text" name="search" class="form-control border-secondary border-2 fw-custom rounded-start" placeholder="Search ..." aria-label="Search ..." aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary fw-custom border-2 border-start-0" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
                 </form>
 

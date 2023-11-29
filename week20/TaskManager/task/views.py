@@ -3,6 +3,7 @@ from .models import Task, Category, Tag
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.db.models import Q
 
 
 @login_required
@@ -97,3 +98,14 @@ def tag_detail(request, pk):
 def mine(request):
     mine = Task.objects.filter(user_id=request.user.id)
     return render(request, "task/mine.html", context={"mine":mine})
+
+def categories(request):
+    categories = Category.objects.all()
+    return render(request, "task/categories.html", context={"categories":categories})
+
+def search(request):
+    param = request.GET["search"]
+    tasks = Task.objects.filter(title__icontains=param)
+
+
+    return HttpResponse("...")
