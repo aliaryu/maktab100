@@ -12,3 +12,6 @@ def index_view(request):
         "tasks": tasks
     }
     return render(request, "index.html", context=context)
+
+def handler404(request, exception):
+    return render(request, '404.html', status=404)
