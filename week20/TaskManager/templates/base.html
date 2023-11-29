@@ -47,7 +47,7 @@
                 
                 <form class="input-group ms-lg-5" method="get" action="{% url "task:search" %}">
                     {% comment %} {% csrf_token %} {% endcomment %}
-                    <input type="text" name="search" class="form-control border-secondary border-2 fw-custom rounded-start" placeholder="Search ..." aria-label="Search ..." aria-describedby="button-addon2">
+                    <input type="text" name="search" class="form-control border-secondary border-2 fw-custom rounded-start" placeholder="Search Title, #Tag, ... " aria-label="Search ..." aria-describedby="button-addon2" required>
                     <button class="btn btn-outline-secondary fw-custom border-2 border-start-0" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
                 </form>
 
@@ -63,7 +63,7 @@
                       SignIn
                     </button>
 
-                    <a class="btn btn-outline-secondary fw-custom border-2 my-1 fw-custom" href="#" role="button">SignUp</a>
+                    {% comment %} <a class="btn btn-outline-secondary fw-custom border-2 my-1 fw-custom" href="#" role="button">SignUp</a> {% endcomment %}
 
                     {% comment %} LOGIN MODAL {% endcomment %}
                     <div class="modal fade" id="ModalForm" tabindex="-1" aria-hidden="true">
