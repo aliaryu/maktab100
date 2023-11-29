@@ -78,7 +78,8 @@
                         <div class="modal-content">
 
                             {% comment %} LOGIN FORM {% endcomment %}
-                            <form action="">
+                            <form action="{% url "login" %}" method="post">
+                              {% csrf_token %}
                               <div class="modal-header">
                                 <h5 class="modal-title fw-custom">Login Form ~</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -86,18 +87,20 @@
                               <div class="modal-body">
                                 <div class="mb-3">
                                     <label class="fw-custom" for="Username">Username<span class="text-danger"> *</span></label>
-                                    <input type="text" name="username" class="form-control fw-custom" id="Username" placeholder="Enter Username">
+                                    {% comment %} <input type="text" name="username" class="form-control fw-custom" id="Username" placeholder="Enter Username"> {% endcomment %}
+                                    {{ login_form.username }}
                                 </div>
                     
                                 <div class="mb-3">
                                     <label class="fw-custom" for="Password">Password<span class="text-danger"> *</span></label>
-                                    <input type="password" name="password" class="form-control fw-custom" id="Password" placeholder="Enter Password">
+                                    {% comment %} <input type="password" name="password" class="form-control fw-custom" id="Password" placeholder="Enter Password"> {% endcomment %}
+                                    {{ login_form.password }}
                                 </div>
                               </div>
                               <div class="modal-footer pt-4">                  
-                                <button type="button" class="btn btn-secondary mx-auto w-100 fw-custom">Login</button>
+                                <button type="submit" class="btn btn-secondary mx-auto w-100 fw-custom">Login</button>
                               </div>
-                          </form>
+                            </form>
 
                         </div>
                       </div>

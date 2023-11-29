@@ -12,18 +12,18 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({
             'type': 'text',
-            'class': 'form-control',
+            'class': 'form-control fw-custom',
             'id': 'username',
             'name': 'username',
-            'placeholder': 'Username',
-            'required': '',
+            'placeholder': "Enter Username",
+            'required': True,
         })
 
         self.fields['password'].widget.attrs.update({
             'type': 'password',
-            'class': 'form-control',
+            'class': 'form-control fw-custom',
             'id': 'password',
             'name': 'password',
-            'placeholder': 'Password',
-            'required': '',
+            'placeholder': "Enter Password",
+            'required': True,
         })

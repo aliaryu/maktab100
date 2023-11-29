@@ -1,7 +1,13 @@
 from django.shortcuts import render
+from account.forms import LoginForm
 
 
 def index_view(request):
 
-    tasks= 1
-    return render(request, "task/index.html", {'tasks': tasks})
+    login_form = LoginForm()
+
+    context = {
+        "login_form": login_form,
+    }
+
+    return render(request, "index.html", context=context)

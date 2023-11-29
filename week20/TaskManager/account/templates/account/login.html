@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+
+{% if login_form.errors %}
+  <div class="alert alert-danger">
+    <strong>Error(s):</strong>
+    <ul>
+      {% for error in login_form.errors.values %}
+        <li>{{ error.0 }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+<form action="{% url "login" %}" method="post">
+    {% csrf_token %}
+    <div class="modal-header">
+      <h5 class="modal-title fw-custom mb-3">Login Form ~</h5>
+    </div>
+    <div class="modal-body">
+      <div class="mb-3">
+          <label class="fw-custom" for="Username">Username<span class="text-danger"> *</span></label>
+          {% comment %} <input type="text" name="username" class="form-control fw-custom" id="Username" placeholder="Enter Username"> {% endcomment %}
+          {{ login_form.username }}
+      </div>
+
+      <div class="mb-3">
+          <label class="fw-custom" for="Password">Password<span class="text-danger"> *</span></label>
+          {% comment %} <input type="password" name="password" class="form-control fw-custom" id="Password" placeholder="Enter Password"> {% endcomment %}
+          {{ login_form.password }}
+      </div>
+    </div>
+    <div class="modal-footer pt-4">                  
+      <button type="submit" class="btn btn-secondary mx-auto w-100 fw-custom">Login</button>
+    </div>
+</form>
+
+{% endblock content %}
