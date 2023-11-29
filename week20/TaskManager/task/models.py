@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -66,8 +67,9 @@ class Task(models.Model):
         verbose_name = "Task"
         verbose_name_plural = "Tasks"
 
-
-
+    def get_absolute_url(self):
+        return reverse("task:task_detail", kwargs={"pk": self.pk})
+    
     def __str__(self):
         return self.title
 

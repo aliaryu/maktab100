@@ -7,5 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path("", index_view, name="index"),
-    path("account/", include("account.urls"))
+    path("account/", include("account.urls")),
+    path("tasks/", include("task.urls"))
 ]
