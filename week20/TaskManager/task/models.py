@@ -66,6 +66,8 @@ class Task(models.Model):
         verbose_name = "Task"
         verbose_name_plural = "Tasks"
 
+
+
     def __str__(self):
         return self.title
 

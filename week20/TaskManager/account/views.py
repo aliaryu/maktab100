@@ -9,8 +9,6 @@ def login_view(request):
     login_form = LoginForm
     if request.method == "POST":
         login_form = login_form(data=request.POST)
-        print(login_form.errors)
-        print(login_form.errors.as_data())
         if login_form.is_valid():
             username = login_form.cleaned_data["username"]
             password = login_form.cleaned_data["password"]
