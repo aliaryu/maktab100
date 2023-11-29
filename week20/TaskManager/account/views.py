@@ -6,6 +6,8 @@ from django.http import HttpResponse
 
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect("index")
     login_form = LoginForm
     if request.method == "POST":
         login_form = login_form(data=request.POST)
