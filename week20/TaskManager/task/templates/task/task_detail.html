@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+
+
+{% comment %} {% block h1 %}{% endblock h1 %}
+
+{% block p1 %}{% endblock p1 %} {% endcomment %}
+
+
+
+{% block content %}
+<section class="container-fluid py-5">
+    <div class="container-lg">
+        
+        <section class="py-5">
+            <div class="container">
+              <div class="row gx-5 row justify-content-center">
+
+                <!-- IMAGE -->
+
+
+                <main class="col-lg-6">
+                  <div class="ps-lg-3">
+
+                    <!-- TITLE -->
+                    <h4 class="title text-dark fw-custom">{{ task.title }}</h4>
+                    {% comment %} <div class="d-flex flex-row my-3">
+
+                      <span class="text-muted fw-custom"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154 Student</span>
+                      <span class="text-muted ms-2 fw-custom">have bought</span>
+                    </div> {% endcomment %}
+          
+                    <div class="mb-3">
+                      <span class="h5 fw-custom"><a href={{ task.category.get_absolute_url }}>{{ task.category.category }}</a></span>
+                    </div>
+                    
+                    <!-- DESCRIPTION -->
+                    <p class="fw-custom">
+                        {{ task.description }}
+                    </p>
+                    
+                    <!-- MORE INFO -->
+                    <div class="row">
+                      <dt class="col-3 fw-custom">Owner:</dt>
+                      <dd class="col-9 fw-custom text-muted">{{ task.user.username }}</dd>
+
+                      <dt class="col-3 fw-custom">Status:</dt>
+                      <dd class="col-9 fw-custom text-muted">{{ task.get_status_display }}</dd>
+          
+                      <dt class="col-3 fw-custom">Due Date:</dt>
+                      <dd class="col-9 fw-custom text-muted">{{ task.due_date|date:"Y-m-d" }}</dd>
+          
+                      <dt class="col-3 fw-custom">Tags:</dt>
+                      <dd class="col-9 fw-custom text-muted">
+                        {% for tag in task.tags.all %}
+                            <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>,
+                        {% endfor %}
+                      </dd>
+                    </div>
+          
+                    <hr />
+                    
+                    <!-- BUTTONS -->
+                    <a href="#" class="btn btn-secondary my-1"> <i class="bi bi-bag"></i> Buy now </a>
+                    <a href="#" class="btn btn-secondary my-1"> <i class="bi bi-cart3"></i> Add to cart </a>
+                    <a href="#" class="btn btn-secondary my-1"> <i class="bi bi-save2"></i> Save </a>
+
+
+                  </div>
+                </main>
+
+              </div>
+            </div>
+        </section>
+
+    </div>
+</section>
+{% endblock content %}
+

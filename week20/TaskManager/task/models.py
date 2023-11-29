@@ -12,6 +12,9 @@ class Category(models.Model):
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
+    def get_absolute_url(self):
+        return reverse("task:category_detail", kwargs={"pk": self.pk})
+
     def __str__(self):
         return self.category
 
@@ -22,6 +25,9 @@ class Tag(models.Model):
     class Meta:
         verbose_name = "Tag"
         verbose_name_plural = "Tags"
+
+    def get_absolute_url(self):
+        return reverse("task:tag_detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.tag
